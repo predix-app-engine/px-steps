@@ -76,11 +76,11 @@ iron-icon.current {
   width: 70px;
   font-size: 12px;
   text-align: center;
-  top: 20px;
+  top: 30px;
   left: -35px;
 
   color: var(--px-path-guide-step_label-color, #333);
-  font-weight: var(--px-path-guide-step-label-font-weight, bold);
+  font-weight: var(--px-path-guide-step-label-font-weight, normal);
 }
 
 .step-label.current {
