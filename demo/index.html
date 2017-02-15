@@ -41,18 +41,32 @@
       <px-demo-component>
         <style id="px-path-guide-custom-styles">
         :host {
-          --px-path-guide-fill-color: #fff;
-          --px-path-guide-line-color: #333;
-          --px-path-guide-font-color: #333;
+          --px-path-guide-icon-size: 16px;
+          --px-path-guide-icon-color: #333;
+          --px-path-guide-icon-top: -8px;
+          --px-path-guide-icon-left: -8px;
+          --px-path-guide-current-icon-size: 24px;
+          --px-path-guide-current-icon-color: #333;
+          --px-path-guide-current-icon-top: -12px;
+          --px-path-guide-current-icon-left: -10px;
+
+          --px-path-guide-connector-color: #333;
           --px-path-guide-connector-length: 120px;
+
           --px-path-guide-step-diameter: 20px;
           --px-path-guide-step-radius: 10px;
+          --px-path-guide-step-border-color: #333;
+          --px-path-guide-step-fill-color: #fff;
+          --px-path-guide-step-label-color: #333;
+          --px-path-guide-step-font-weight: normal;
+
+
           --px-path-guide-current-step-diameter: 30px;
           --px-path-guide-current-step-radius: 15px;
-          --px-path-guide-current-step-fill-color: #3ab4d4;
-          --px-path-guide-current-step-line-color: #3ab4d4;
-          --px-path-guide-current-step-font-color: #333;
-          --px-path-guide-current-step-font-weight: bold;
+          --px-path-guide-current-step-border-color: #333;
+          --px-path-guide-current-step-fill-color: #fff;
+          --px-path-guide-current-step-label-color: #333;
+          --px-path-guide-current-step-font-weight: normal;
         }
         </style>
         <px-path-guide
