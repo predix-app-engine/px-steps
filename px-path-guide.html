@@ -1,0 +1,92 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-icon/iron-icon.html">
+<link rel="import" href="../px-polymer-font-awesome/px-polymer-font-awesome.html">
+<link rel="import" href="css/px-path-guide-styles.html">
+
+<dom-module id="px-path-guide">
+  <template>
+    <style include="px-path-guide-styles"></style>
+    <div id="main" draggable="true">
+      <template id="steps" is="dom-repeat" items="[[pathState.steps]]">
+        <div id="step-item-[[item.id]]" class="step-connector" on-click="itemClick">
+          <div class$="step-icon [[getStepState(item)]]"></div>
+          <iron-icon class$="[[getStepState(item)]]" icon$="fa:[[getIcon(item)]]"></iron-icon>
+          <div class$="step-label [[getStepState(item)]]">[[item.label]]</div>
+        </div>
+      </template>
+    </div>
+  </template>
+  <script>
+    Polymer({
+      is: 'px-path-guide',
+      properties: {
+        /**
+          * The font-awesome icon name for a completed step.  If not provided, no icon will be rendered in the circles for such steps.
+          * font-awesome icon names start with 'fa-' (e.g., 'fa-check', 'fa-asterisk').
+          */
+        completedStepIcon: 'fa-check',
+
+        /**
+          * The font-awesome icon name for the current step.  If not provided, no icon will be rendered in the circle for such step.
+          */
+        currentStepIcon: 'fa-circle',
+
+        /**
+          * The object that contains the details of the steps.  If empty or does not contain any 'steps' (see below), the whole component will not render.
+          * The structure of this object should be:
+          {
+            name: String,
+            steps: [ { id: Number, label: String, completed: Boolean, current: Boolean}, ... ]
+          }.  For each step in the 'steps' array, if 'completed' is true, the icon whose name is in the 'completedStepIcon' property will be placed
+          in the circle for the step.  Otherwise if the 'current' is true, the icon whose name is in the 'currentStepIcon' property will be used.
+          For each step, the 'label' attribute is used for the text underneath the corresponding circle.  */
+        pathState: {
+          type: Object
+        },
+
+        /**
+          * The name of the event that is dispatched from the browser's 'window' object when a step is clicked on.  The event is populated with a
+          * 'payload' object property, with an attribute of 'id' whose value is that of the similarly-named attribute in the corresponding step in
+          * the 'pathState' property.  The consumer of this component can then define a listener function (attaching it to the window as well)
+          * to process the event in the desired manner.  If this has an undefined or empty value, no event will be dispatched.
+          */
+        stepClickEventName: ''
+      },
+
+      getIcon: function(item) {
+        if (item.completed) {
+          return this.completedStepIcon;
+        }
+        else if (item.current) {
+          return this.currentStepIcon;
+        }
+        return "";
+      },
+
+      getStepState: function(item) {
+        var classes = '';
+        if (item.completed) {
+          classes += 'completed';
+        }
+        if (item.current) {
+          classes += 'current';
+        }
+        return classes;
+      },
+
+      itemClick: function(event) {
+        if (this.stepClickEventName === undefined || this.stepClickEventName === null || this.stepClickEventName === '') {
+          return;
+        }
+        var stepId = event.currentTarget.id.substr(10);
+        var stepClickEvent =
+          new Event(this.stepClickEventName,
+            {"bubbles": true, "cancelable": false}
+          );
+        stepClickEvent.payload = { id : stepId };
+        window.dispatchEvent(stepClickEvent);
+      }
+
+    });
+  </script>
+</dom-module>
