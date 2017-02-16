@@ -40,7 +40,6 @@ Predix branding rules go in px-path-guide-predix.scss, not in this file.
   margin-top: -var(--px-path-guide-step-radius, 10px);
   border-color: var(--px-path-guide-step-border-color, #333);
   background-color: var(--px-path-guide-step-fill-color, #fff);
-  font-weight: var(--px-path-guide-step-font-weight, bold);
 }
 
 .step-icon.current {
@@ -51,14 +50,13 @@ Predix branding rules go in px-path-guide-predix.scss, not in this file.
   margin-top: -var(--px-path-guide-current-step-radius, 15px);
   border-color: var(--px-path-guide-current-step-border-color, #333);
   background-color: var(--px-path-guide-current-step-fill-color, #fff);
-  font-weight: var(--px-path-guide-current-step-font-weight, bold);
 }
 
 iron-icon {
   position: absolute;
   --iron-icon-width: var(--px-path-guide-icon-size, 14px);
   --iron-icon-height: var(--px-path-guide-icon-size, 14px);
-  --iron-icon-fill-color: var(--px-path-guide-icon-color);
+  --iron-icon-fill-color: var(--px-path-guide-icon-color, #333);
   top: var(--px-path-guide-icon-left, -6px);
   left: var(--px-path-guide-icon-top, -5px);
 }

@@ -58,7 +58,7 @@
           --px-path-guide-step-border-color: #333;
           --px-path-guide-step-fill-color: #fff;
           --px-path-guide-step-label-color: #333;
-          --px-path-guide-step-label-font-weight: bold;
+          --px-path-guide-step-label-font-weight: normal;
 
 
           --px-path-guide-current-step-diameter: 30px;
@@ -66,14 +66,14 @@
           --px-path-guide-current-step-border-color: #333;
           --px-path-guide-current-step-fill-color: #fff;
           --px-path-guide-current-step-label-color: #333;
-          --px-path-guide-current-step-label-font-weight: normal;
+          --px-path-guide-current-step-label-font-weight: bold;
         }
         </style>
         <px-path-guide
           style="display: inline-block; margin-top: 50px; margin-left: 100px;"
           current-step-icon="fa-dot-circle-o"
           completed-step-icon="fa-check"
-          path-state="[[props.pathState.value]]"></px-path-guide>
+          steps="[[props.steps.value]]"></px-path-guide>
       </px-demo-component>
       <!-- END Component ------------------------------------------------------>
 
@@ -125,38 +125,47 @@
        * @property demoProps
        * @type {Array}
        */
-      configs: {
-        type: Array,
-        value: function () {
-          return [
-            {
-              configName: "Default",
-              configReset: true
-            }
-          ]
-        }
-      }
+       configs: {
+         type: Array,
+         value: function(){
+           return [{ configName: "Default", configReset: true }]
+         }
+       }
     },
 
     /**
      * A reference for `this.props`. Read the documentation there.
      */
     demoProps: {
-      pathState: {
-        type: Object,
-        defaultValue:{
-          name: 'Seed Development',
-          steps:
-          [
-            { id: 1, label: "Step 1", started: true, completed: true, current: false},
-            { id: 2, label: "Step 2", started: true, completed: true, current: false},
-            { id: 3, label: "Step 3", started: false, completed: false, current: true},
-            { id: 4, label: "Step 4", started: false, completed: false, current: false}
-          ]
-        },
+      steps: {
+        type: Array,
+        value: [
+          { id: 1, label: "Step 1", completed: true, current: false},
+          { id: 2, label: "Step 2", completed: true, current: false},
+          { id: 3, label: "Step 3", completed: false, current: true},
+          { id: 4, label: "Step 4", completed: false, current: false}
+        ],
         inputType: 'code:JSON'
+      },
+
+      completedStepIcon: {
+        type: String,
+        defaultValue: 'fa-check',
+        inputType: 'text',
+        inputPlaceholder: 'fa-'
+      },
+      currentStepIcon: {
+        type: String,
+        defaultValue: 'fa-circle',
+        inputType: 'text',
+        inputPlaceholder: 'fa-'
+      },
+      stepClickEventName: {
+        type: String,
+        defaultValue: '',
+        inputType: 'text',
+        inputPlaceholder: ''
       }
     }
-
   });
 </script>
