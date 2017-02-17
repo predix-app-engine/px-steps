@@ -8,7 +8,7 @@ px-path-guide is a visual representation of a sequence of steps and any associat
 
 ## Overview
 
-Use the px-path-guide to represent any sequence of steps that can be completed.  An example of a process is user account creation, which can consist of this sequence of steps: 1. Sign Up, 2. Email Confirmation, 3. Account Activation and 4. Account Configuration.  px-path-guide will can represent this process with a sequence of circles, each corresponding to the steps.  Each step is labeled accordingly.  px-path-guide can place connector lines between adjacent steps.  Each step's completion state can be symbolized by a font-awesome icon, like a checkmark for a completed step.
+Use the px-path-guide to represent any sequence of steps that can be completed.  An example of a process is user account creation, which can consist of this sequence of steps: 1. Sign Up, 2. Email Confirmation, 3. Account Activation and 4. Account Configuration.  px-path-guide will can represent this process with a sequence of nodes (circles by default) corresponding to the steps.  Each step is labeled accordingly.  px-path-guide can place connector lines between adjacent steps.  Each step's completion state can be symbolized by a font-awesome icon, like a checkmark for a completed step.
 
 ## Usage
 
