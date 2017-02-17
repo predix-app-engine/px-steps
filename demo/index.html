@@ -41,6 +41,8 @@
       <px-demo-component>
         <style id="px-path-guide-custom-styles">
         :host {
+
+          /* icon styles */
           --px-path-guide-icon-size: 16px;
           --px-path-guide-icon-color: #333;
           --px-path-guide-icon-top: -8px;
@@ -50,29 +52,31 @@
           --px-path-guide-current-icon-top: -12px;
           --px-path-guide-current-icon-left: -10px;
 
+          /* connector styles */
           --px-path-guide-connector-color: #333;
           --px-path-guide-connector-length: 150px;
 
+          /* node/step styles */
           --px-path-guide-step-diameter: 30px;
           --px-path-guide-step-radius: 15px;
           --px-path-guide-step-border-color: #333;
           --px-path-guide-step-fill-color: #fff;
           --px-path-guide-step-label-color: #333;
           --px-path-guide-step-label-font-weight: normal;
-
-
           --px-path-guide-current-step-diameter: 50px;
           --px-path-guide-current-step-radius: 25px;
           --px-path-guide-current-step-border-color: #333;
           --px-path-guide-current-step-fill-color: #fff;
+
+          /* label styles */
           --px-path-guide-current-step-label-color: #333;
           --px-path-guide-current-step-label-font-weight: bold;
         }
         </style>
         <px-path-guide
           style="display: inline-block; margin-top: 50px; margin-left: 100px;"
-          current-step-icon="fa-dot-circle-o"
-          completed-step-icon="fa-check"
+          current-step-icon="{{props.currentStepIcon.value}}"
+          completed-step-icon="{{props.completedStepIcon.value}}"
           steps="[[props.steps.value]]"></px-path-guide>
       </px-demo-component>
       <!-- END Component ------------------------------------------------------>
@@ -128,7 +132,19 @@
        configs: {
          type: Array,
          value: function(){
-           return [{ configName: "Default", configReset: true }]
+           return [
+             { configName: "Default",
+               steps: [
+                 { id: 1, label: "Step 1", completed: true, current: false},
+                 { id: 2, label: "Step 2", completed: true, current: false},
+                 { id: 3, label: "Step 3", completed: false, current: true},
+                 { id: 4, label: "Step 4", completed: false, current: false}
+               ],
+               completedStepIcon: 'fa-check',
+               currentStepIcon: 'fa-circle',
+               stepClickEventName: 'STEP_CLICK'
+             }
+           ]
          }
        }
     },
@@ -147,24 +163,26 @@
         ],
         inputType: 'code:JSON'
       },
-
       completedStepIcon: {
         type: String,
+        value: 'fa-check',
         defaultValue: 'fa-check',
         inputType: 'text',
         inputPlaceholder: 'fa-'
       },
       currentStepIcon: {
         type: String,
+        value: 'fa-circle',
         defaultValue: 'fa-circle',
         inputType: 'text',
         inputPlaceholder: 'fa-'
       },
       stepClickEventName: {
         type: String,
+        value: 'STEP_CLICK',
         defaultValue: '',
         inputType: 'text',
-        inputPlaceholder: ''
+        inputPlaceholder: 'STEP_CLICK'
       }
     }
   });
