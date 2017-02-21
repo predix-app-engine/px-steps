@@ -77,7 +77,17 @@
           style="display: inline-block; margin-top: 50px; margin-left: 100px;"
           current-step-icon="{{props.currentStepIcon.value}}"
           completed-step-icon="{{props.completedStepIcon.value}}"
-          steps="[[props.steps.value]]"></px-path-guide>
+          steps="[[props.steps.value]]"
+          step-click-event-name="[[props.stepClickEventName.value]]">
+        </px-path-guide>
+        <div style="margin-top: 60px; margin-left: 90px; font-size: 18px;">
+          Click on a step.
+        </div>
+        <template is="dom-if" if="[[clicked]]">
+          <div style="margin-top: 15px; margin-left: 90px; font-size: 18px;">
+            You clicked on step with id [[lastIDClicked]]
+          </div>
+        </template>
       </px-demo-component>
       <!-- END Component ------------------------------------------------------>
 
@@ -146,7 +156,9 @@
              }
            ]
          }
-       }
+       },
+       clicked: false,
+       lastClickedID: '',
     },
 
     /**
@@ -184,6 +196,17 @@
         inputType: 'text',
         inputPlaceholder: 'STEP_CLICK'
       }
+    },
+
+    ready: function() {
+      var that = this;
+      window.addEventListener(
+        this.props.stepClickEventName.value,
+        function(event) {
+          that.clicked = true;
+          that.lastIDClicked = event.payload.id;
+        }
+      );
     }
   });
 </script>

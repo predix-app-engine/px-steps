@@ -152,13 +152,21 @@ The following custom properties are available for styling (shown with their corr
           * The font-awesome icon name for a completed step.  If not provided, no icon will be rendered in the nodes for such steps.
           * font-awesome icon names start with 'fa-' (e.g., 'fa-check', 'fa-asterisk').
           */
-        completedStepIcon: 'fa-check',
-
+        completedStepIcon: {
+          type: 'String',
+          value: 'fa-check',
+          reflectToAttribute: true,
+          observer: '_onPropertyChange'
+        },
         /**
           * The font-awesome icon name for the current step.  If not provided, no icon will be rendered in the node for such step.
           */
-        currentStepIcon: 'fa-circle',
-
+        currentStepIcon: {
+          type: 'String',
+          value: 'fa-check',
+          reflectToAttribute: true,
+          observer: '_onPropertyChange'
+        },
         /**
           * The array that contains the steps and details of each.  If empty, the whole component is not rendered at all.
           * The structure should be
@@ -169,7 +177,7 @@ The following custom properties are available for styling (shown with their corr
           For each step, the 'label' attribute is used for the text underneath the corresponding circle.  */
         steps: {
           type: Array,
-          observer: '_onStepsChange'
+          observer: '_onPropertyChange'
         },
 
         /**
@@ -181,7 +189,7 @@ The following custom properties are available for styling (shown with their corr
         stepClickEventName: ''
       },
 
-      _onStepsChange: function() {
+      _onPropertyChange: function() {
         this.$.steps.render();
         this.updateStyles();
       },
