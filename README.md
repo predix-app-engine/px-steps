@@ -4,11 +4,11 @@
 [![px-path-guide demo](px-path-guide.png?raw=true)](https://github.com/PredixDev/px-path-guide?target=_blank)
 
 
-px-path-guide is a visual representation of a sequence of steps and any associated progress details.  It can show which steps have been completed, the current step, and later steps.
+px-path-guide is a Polymer web component that is a visual representation of any sequence of steps and progress made on those steps.  It can show which steps have been completed, the current step, and remaining steps, for example.  Its visual details (nodes, connecting lines, icons, fonts, etc.) can be styled using custom CSS properties (shown in red in the above diagram).
 
 ## Overview
 
-Use the px-path-guide to represent any sequence of steps that can be completed.  An example of a process is user account creation, which can consist of this sequence of steps: 1. Sign Up, 2. Email Confirmation, 3. Account Activation and 4. Account Configuration.  px-path-guide will can represent this process with a sequence of nodes (circles by default) corresponding to the steps.  Each step is labeled accordingly.  px-path-guide can place connector lines between adjacent steps.  Each step's completion state can be symbolized by a font-awesome icon, like a checkmark for a completed step.
+Use the px-path-guide to represent any sequence of steps in a process.  An example of a process is user account creation, which can consist of this sequence of steps: 1. Sign Up, 2. Email Confirmation, 3. Account Activation and 4. Account Configuration.  px-path-guide can represent this process with a sequence of nodes (circles by default) corresponding to the steps.  Each step is labeled accordingly.  px-path-guide can place connector lines between adjacent steps.  Each step's completion state can be symbolized by a font-awesome icon, like a checkmark ('fa-check') for a completed step.
 
 ## Usage
 
