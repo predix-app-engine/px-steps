@@ -56,7 +56,7 @@ You can can attach the following listener(s) to these parts of the component:
 
 ## Local Development
 
-From the component's directory...
+From the component's directory, to setup the component and its dependencies:
 
 ```
 $ npm install
@@ -64,13 +64,13 @@ $ bower install
 $ gulp sass
 ```
 
-From the component's directory, to start a local server run:
+From the component's directory, to start a local server and automatically bring up web page of the component demo:
 
 ```
 $ gulp serve
 ```
 
-Navigate to the root of that server (e.g. http://localhost:8080/) in a browser to open the API documentation page, with link to the "Demo" / working examples.
+(A web page with URL http://localhost:8080/ will be opened in your default browser.)
 
 ### LiveReload
 
