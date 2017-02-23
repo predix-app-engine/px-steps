@@ -2,7 +2,7 @@
     "name": "px-path-guide",
     "author": "General Electric",
     "description": "Polymer component to visually represent a sequence of steps and associated progress details.",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "private": true,
     "extName": null,
     "repository": {
