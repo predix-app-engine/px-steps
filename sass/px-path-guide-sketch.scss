@@ -71,12 +71,11 @@ iron-icon.current {
 
 .step-label {
   position: absolute;
-  width: 70px;
-  font-size: 12px;
+  width: var(--px-path-guide-step-label-width, 70px);
+  font-size: var(--px-path-guide-step-label-font-size, 12px);
   text-align: center;
-  top: 30px;
-  left: -35px;
-
+  top: var(--px-path-guide-step-label-top, 30px);
+  left: calc(var(--px-path-guide-step-label-width, 70px) / -2);
   color: var(--px-path-guide-step-label-color, #333);
   font-weight: var(--px-path-guide-step-label-font-weight, normal);
 }
