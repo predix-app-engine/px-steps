@@ -97,3 +97,9 @@ iron-icon.current {
 .step-connector:last-of-type {
   width: 1px;
 }
+
+.path-label {
+  display: inline-block;
+  margin-right: var(--px-path-guide-path-label-margin-right, 20px);
+  color: var(--px-path-guide-path-label-color, #333);
+}
