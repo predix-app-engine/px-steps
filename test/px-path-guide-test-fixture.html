@@ -35,5 +35,46 @@
        <px-path-guide id="path_guide"></px-path-guide>
     </template>
   </test-fixture>
+  <script>
+    document.addEventListener('WebComponentsReady', function() {
+      suite('px-path-guide tests', function() {
+
+        var pxPathGuide;
+
+        setup(function() {
+          pxPathGuide = fixture('test_fixture');
+          pxPathGuide.steps = [
+            {"id":1,"label":"Step 1","completed":true,"current":false},
+            {"id":2,"label":"Step 2","completed":true,"current":false},
+            {"id":3,"label":"Step 3","completed":false,"current":true},
+            {"id":4,"label":"Step 4","completed":false,"current":false}
+          ];
+          pxPathGuide.completedStepIcon = "fa-check";
+          pxPathGuide.currentStepIcon = "fa-circle";
+          pxPathGuide.stepClickEventName = "STEP_CLICK";
+          pxPathGuide.label = "Path Label";
+        });
+
+        test('pxPathGuide object should be of type "px-path-guide"', function() {
+          assert(pxPathGuide.is === 'px-path-guide', 'pxPathGuide object has incorrect type: ' + pxPathGuide.is);
+        });
+
+        test('There should be 4 nodes in the path', function() {
+          var nodes = Polymer.dom(pxPathGuide.root).querySelectorAll('div.step-connector');
+          assert(nodes.length === 4, 'Incorrect number of nodes: ' + nodes.length);
+        });
+
+        test('There should be 4 icon elements in the path', function() {
+          var nodes = Polymer.dom(pxPathGuide.root).querySelectorAll('iron-icon');
+          assert(nodes.length === 4, 'Incorrect number of icon holder elements: ' + nodes.length);
+        });
+
+        test('There should be a path label in the path', function() {
+          var nodes = Polymer.dom(pxPathGuide.root).querySelectorAll('div.path-label');
+          assert(nodes.length === 1, 'Incorrect number of path labels: ' + nodes.length);
+        });
+      });
+    });
+  </script>
 </body>
 </html>
