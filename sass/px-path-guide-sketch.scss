@@ -52,6 +52,16 @@ Predix branding rules go in px-path-guide-predix.scss, not in this file.
   background-color: var(--px-path-guide-current-step-fill-color, #fff);
 }
 
+.step-icon.complete {
+  width: var(--px-path-guide-complete-step-diameter, 20px);
+  height: var(--px-path-guide-complete-step-diameter, 20px);
+  border-radius: var(--px-path-guide-complete-step-radius, 10px);
+  margin-left: calc(-var(--px-path-guide-complete-step-diameter, 10px) / 2);
+  margin-top: calc(-var(--px-path-guide-complete-step-diameter, 10px) / 2);
+  border-color: var(--px-path-guide-complete-step-border-color, #333);
+  background-color: var(--px-path-guide-complete-step-fill-color, #666);
+}
+
 iron-icon {
   position: absolute;
   --iron-icon-width: var(--px-path-guide-icon-size, 14px);
@@ -67,6 +77,14 @@ iron-icon.current {
   --iron-icon-fill-color: var(--px-path-guide-current-icon-color, #333);
   top: var(--px-path-guide-current-icon-top, -5px);
   left: var(--px-path-guide-current-icon-left, -6px);
+}
+
+iron-icon.complete {
+  --iron-icon-width: var(--px-path-guide-complete-icon-size, 14px);
+  --iron-icon-height: var(--px-path-guide-complete-icon-size, 14px);
+  --iron-icon-fill-color: var(--px-path-guide-complete-icon-color, #CCC);
+  top: var(--px-path-guide-complete-icon-top, -6px);
+  left: var(--px-path-guide-complete-icon-left, -5px);
 }
 
 .step-label {
@@ -85,6 +103,11 @@ iron-icon.current {
   font-weight: var(--px-path-guide-current-step-label-font-weight, bold);
 }
 
+.step-label.complete {
+  color: var(--px-path-guide-complete-step-label-color, #666);
+  font-weight: var(--px-path-guide-complete-step-label-font-weight, normal);
+}
+
 .step-connector {
   position: relative;
   vertical-align:middle;
@@ -92,6 +115,10 @@ iron-icon.current {
   height: 1px;
   background-color: var(--px-path-guide-connector-color, #333);
   width: var(--px-path-guide-connector-length, 120px);
+}
+
+.step-connector.complete {
+  background-color: var(--px-path-guide-connector-color, #999);
 }
 
 .step-connector:last-of-type {

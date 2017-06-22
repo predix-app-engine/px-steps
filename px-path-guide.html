@@ -114,10 +114,16 @@ The following custom properties are available for styling (shown with their corr
     --px-path-guide-icon-color: #333;
     --px-path-guide-icon-top: -8px;
     --px-path-guide-icon-left: -8px;
+
     --px-path-guide-current-icon-size: 24px;
     --px-path-guide-current-icon-color: #333;
     --px-path-guide-current-icon-top: -12px;
     --px-path-guide-current-icon-left: -10px;
+
+    --px-path-guide-complete-icon-size: 14px;
+    --px-path-guide-complete-icon-color: #CCC
+    --px-path-guide-complete-icon-top: -6px;
+    --px-path-guide-complete-icon-left: -5px;
 
     --px-path-guide-connector-color: #333;
     --px-path-guide-connector-length: 120px;
@@ -136,6 +142,14 @@ The following custom properties are available for styling (shown with their corr
     --px-path-guide-current-step-fill-color: #fff;
     --px-path-guide-current-step-label-color: #333;
     --px-path-guide-current-step-label-font-weight: normal;
+
+
+    --px-path-guide-complete-step-diameter: 20px;
+    --px-path-guide-complete-step-radius: 10px;
+    --px-path-guide-complete-step-border-color: #333;
+    --px-path-guide-complete-step-fill-color: #666;
+
+
     --px-path-guide-path-label-margin-right: 20px;
     --px-path-guide-path-label-color: #333;
     --px-path-guide-path-label-font-size: 12px;
@@ -147,7 +161,7 @@ The following custom properties are available for styling (shown with their corr
     <div id="main" draggable="true">
       <div class="path-label" hidden$="[[!pathLabel]]">[[pathLabel]]</div>
       <template id="steps" is="dom-repeat" items="[[steps]]">
-        <div id="step-item-[[item.id]]" class="step-connector" on-click="_itemClick">
+        <div id="step-item-[[item.id]]" class$="step-connector [[_getStepState(item)]]" on-click="_itemClick">
           <div class$="step-icon [[_getStepState(item)]]"></div>
           <iron-icon class$="[[_getStepState(item)]]" icon$="fa:[[_getIcon(item)]]"></iron-icon>
           <div class$="step-label [[_getStepState(item)]]">[[item.label]]</div>
@@ -224,6 +238,8 @@ The following custom properties are available for styling (shown with their corr
         var classes = '';
         if (item.current) {
           classes += 'current';
+        } else if (item.completed) {
+          classes += 'complete'
         }
         return classes;
       },
