@@ -27,12 +27,8 @@ A Polymer component that visualizes step sequences and progress made on them.
     :host {
       --px-path-guide-icon-size: 16px;
       --px-path-guide-icon-color: #333;
-      --px-path-guide-icon-top: -8px;
-      --px-path-guide-icon-left: -8px;
       --px-path-guide-current-icon-size: 24px;
       --px-path-guide-current-icon-color: #333;
-      --px-path-guide-current-icon-top: -12px;
-      --px-path-guide-current-icon-left: -10px;
 
       --px-path-guide-connector-color: #333;
       --px-path-guide-connector-length: 120px;
@@ -50,7 +46,6 @@ A Polymer component that visualizes step sequences and progress made on them.
       --px-path-guide-current-step-border-color: #333;
       --px-path-guide-current-step-fill-color: #fff;
       --px-path-guide-step-label-width: 70px;
-      --px-path-guide-step-label-top: 30px;
       --px-path-guide-step-label-font-size: 12px;
       --px-path-guide-current-step-label-color: #333;
       --px-path-guide-current-step-label-font-weight: normal;
@@ -112,18 +107,12 @@ The following custom properties are available for styling (shown with their corr
 
     --px-path-guide-icon-size: 16px;
     --px-path-guide-icon-color: #333;
-    --px-path-guide-icon-top: -8px;
-    --px-path-guide-icon-left: -8px;
 
     --px-path-guide-current-icon-size: 24px;
     --px-path-guide-current-icon-color: #333;
-    --px-path-guide-current-icon-top: -12px;
-    --px-path-guide-current-icon-left: -10px;
 
     --px-path-guide-complete-icon-size: 14px;
     --px-path-guide-complete-icon-color: #CCC
-    --px-path-guide-complete-icon-top: -6px;
-    --px-path-guide-complete-icon-left: -5px;
 
     --px-path-guide-connector-color: #333;
     --px-path-guide-connector-length: 120px;
@@ -156,19 +145,29 @@ The following custom properties are available for styling (shown with their corr
 -->
 
 <dom-module id="px-path-guide">
+
   <template id="pxPathGuideTemplate">
     <style include="px-path-guide-styles"></style>
-    <div id="main" draggable="true">
-      <div class="path-label" hidden$="[[!pathLabel]]">[[pathLabel]]</div>
+
+    <div id="main" draggable="true" class="flex flex--row flex--left flex--middle">
+      <p class="path-label" hidden$="[[!pathLabel]]">[[pathLabel]]</p>
+
       <template id="steps" is="dom-repeat" items="[[steps]]">
-        <div id="step-item-[[item.id]]" class$="step-connector [[_getStepState(item)]]" on-click="_itemClick">
-          <div class$="step-icon [[_getStepState(item)]]"></div>
-          <iron-icon class$="[[_getStepState(item)]]" icon$="fa:[[_getIcon(item)]]"></iron-icon>
-          <div class$="step-label [[_getStepState(item)]]">[[item.label]]</div>
+        <div class$="step-wrapper [[_getStepState(item)]]">
+          <div class="step-connector"></div>
+          <div id="step-item-[[item.id]]" class="step-item" on-click="_itemClick">
+            <div class="step-icon">
+              <iron-icon icon$="fa:[[_getIcon(item)]]"></iron-icon>
+            </div>
+            <div class="step-label">[[item.label]]</div>
+          </div>
         </div>
       </template>
+
     </div>
+
   </template>
+
   <script>
     Polymer({
       is: 'px-path-guide',
