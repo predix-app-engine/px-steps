@@ -1,6 +1,6 @@
 {
   "name": "px-path-guide",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Polymer component to visually represent a sequence of steps and associated progress details.",
   "main": "px-path-guide.html",
   "ignore": [
