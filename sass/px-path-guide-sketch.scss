@@ -22,111 +22,153 @@ Predix branding rules go in px-path-guide-predix.scss, not in this file.
 // Settings
 @import "px-defaults-design/_settings.defaults.scss";
 @import "px-mixins-design/_tools.mixins.scss";
+@import "px-colors-design/_settings.colors.scss";
 
 // Generic
 @import "px-normalize-design/_generic.normalize.scss";
 @import "px-box-sizing-design/_generic.box-sizing.scss";
 @import "px-helpers-design/_generic.helpers.scss";
 
+// Base
+
+@import 'px-flexbox-design/_base.flexbox.scss';
+
+// Base Variables
+
+:host {
+  --step-length: var(--px-path-guide-connector-length, 120px);
+  --step-diameter: var(--px-path-guide-step-diameter, 20px);
+
+  // Borders
+  --step-border-size: var(--px-path-guide-border-size, 2px);
+  --step-border-radius: var(--px-path-guide-step-border-radius, 10px);
+
+  // Current Step
+  --current-step-diameter: var(--px-path-guide-current-step-diameter, 24px);
+  --current-step-border-radius: var(--px-path-guide-current-step-border-radius, 12px);
+
+  // Complete Step
+  --complete-step-diameter: var(--px-path-guide-complete-step-diameter, 20px);
+  --complete-step-border-radius: var(--px-path-guide-complete-step-border-radius, 10px);
+
+}
+
+.step-wrapper {
+  position: relative; /* Because we are absolutely positioning the connector */
+}
+
+.step-item {
+  width: var(--step-length);
+  position: relative; /* Necessary to get the z-index to work */
+  text-align: center;
+  z-index: 10;
+}
+
 .step-icon {
-  display: block;
-  border: 1px solid;
-  position: relative;
+  display: inline-block;
+  width: var(--step-diameter);
+  height: var(--step-diameter);
+  text-align: center;
 
-  width: var(--px-path-guide-step-diameter, 20px);
-  height: var(--px-path-guide-step-diameter, 20px);
-  border-radius: var(--px-path-guide-step-radius, 10px);
-  margin-left: calc(-var(--px-path-guide-step-diameter, 10px) / 2);
-  margin-top: calc(-var(--px-path-guide-step-diameter, 10px) / 2);
-  border-color: var(--px-path-guide-step-border-color, #333);
-  background-color: var(--px-path-guide-step-fill-color, #fff);
-}
+  border-style: solid;
+  border-width: var(--step-border-size);
+  border-radius: var(--step-border-radius);
+  border-color: var(--px-path-guide-step-border-color, $gray4);
 
-.step-icon.current {
-  width: var(--px-path-guide-current-step-diameter, 30px);
-  height: var(--px-path-guide-current-step-diameter, 30px);
-  border-radius: var(--px-path-guide-current-step-radius, 15px);
-  margin-left: calc(-var(--px-path-guide-current-step-diameter, 15px) / 2);
-  margin-top: calc(-var(--px-path-guide-current-step-diameter, 15px) / 2);
-  border-color: var(--px-path-guide-current-step-border-color, #333);
-  background-color: var(--px-path-guide-current-step-fill-color, #fff);
-}
-
-.step-icon.complete {
-  width: var(--px-path-guide-complete-step-diameter, 20px);
-  height: var(--px-path-guide-complete-step-diameter, 20px);
-  border-radius: var(--px-path-guide-complete-step-radius, 10px);
-  margin-left: calc(-var(--px-path-guide-complete-step-diameter, 10px) / 2);
-  margin-top: calc(-var(--px-path-guide-complete-step-diameter, 10px) / 2);
-  border-color: var(--px-path-guide-complete-step-border-color, #333);
-  background-color: var(--px-path-guide-complete-step-fill-color, #666);
+  background-color: var(--px-path-guide-step-fill-color, $gray3);
 }
 
 iron-icon {
-  position: absolute;
   --iron-icon-width: var(--px-path-guide-icon-size, 14px);
   --iron-icon-height: var(--px-path-guide-icon-size, 14px);
   --iron-icon-fill-color: var(--px-path-guide-icon-color, #333);
-  top: var(--px-path-guide-icon-top, -6px);
-  left: var(--px-path-guide-icon-left, -5px);
-}
-
-iron-icon.current {
-  --iron-icon-width: var(--px-path-guide-current-icon-size, 14px);
-  --iron-icon-height: var(--px-path-guide-current-icon-size, 14px);
-  --iron-icon-fill-color: var(--px-path-guide-current-icon-color, #333);
-  top: var(--px-path-guide-current-icon-top, -5px);
-  left: var(--px-path-guide-current-icon-left, -6px);
-}
-
-iron-icon.complete {
-  --iron-icon-width: var(--px-path-guide-complete-icon-size, 14px);
-  --iron-icon-height: var(--px-path-guide-complete-icon-size, 14px);
-  --iron-icon-fill-color: var(--px-path-guide-complete-icon-color, #CCC);
-  top: var(--px-path-guide-complete-icon-top, -6px);
-  left: var(--px-path-guide-complete-icon-left, -5px);
 }
 
 .step-label {
-  position: absolute;
-  width: var(--px-path-guide-step-label-width, 70px);
-  font-size: var(--px-path-guide-step-label-font-size, 12px);
-  text-align: center;
-  top: var(--px-path-guide-step-label-top, 30px);
-  left: calc(var(--px-path-guide-step-label-width, 70px) / -2);
-  color: var(--px-path-guide-step-label-color, #333);
+  margin-top: calc( var(--px-path-guide-step-label-font-size, 15px) / 2);
+  font-size: var(--px-path-guide-step-label-font-size, 15px);
   font-weight: var(--px-path-guide-step-label-font-weight, normal);
-}
-
-.step-label.current {
-  color: var(--px-path-guide-current-step-label-color, #333);
-  font-weight: var(--px-path-guide-current-step-label-font-weight, bold);
-}
-
-.step-label.complete {
-  color: var(--px-path-guide-complete-step-label-color, #666);
-  font-weight: var(--px-path-guide-complete-step-label-font-weight, normal);
+  color: var(--px-path-guide-step-label-color, $black);
 }
 
 .step-connector {
-  position: relative;
-  vertical-align:middle;
-  display: inline-block;
-  height: 1px;
-  background-color: var(--px-path-guide-connector-color, #333);
-  width: var(--px-path-guide-connector-length, 120px);
+  position: absolute;
+  top: calc( var(--step-diameter) / 2);
+  left: calc( var(--step-length) / -2);
+
+  height: var(--step-border-size);
+  width: var(--step-length);
+  background-color: var(--px-path-guide-connector-color, $gray4);
+  z-index: 1;
 }
 
-.step-connector.complete {
-  background-color: var(--px-path-guide-connector-color, #999);
+.step-wrapper:first-of-type .step-connector {
+  display: none;
 }
 
-.step-connector:last-of-type {
-  width: 1px;
+.current {
+  /* If current step is bigger than normal step, we need extra margin to keep things vertically aligned */
+  &.step-wrapper {
+    margin-top: calc( var(--current-step-diameter) - var(--step-diameter) );
+  }
+
+  .step-icon {
+    width: var(--current-step-diameter);
+    height: var(--current-step-diameter);
+    border-radius: var(--current-step-border-radius);
+    border-color: var(--px-path-guide-current-step-border-color, $select-blue-default);
+    background-color: var(--px-path-guide-current-step-fill-color, $white);
+  }
+
+  iron-icon {
+    --iron-icon-width: var(--px-path-guide-current-icon-size, 14px);
+    --iron-icon-height: var(--px-path-guide-current-icon-size, 14px);
+    --iron-icon-fill-color: var(--px-path-guide-current-icon-color, $select-blue-default);
+  }
+
+  .step-label {
+    top: calc( var(--current-step-diameter) / 2);
+    color: var(--px-path-guide-current-step-label-color, $black);
+    font-weight: var(--px-path-guide-current-step-label-font-weight, bold);
+  }
+
+  .step-connector {
+    background-color: var(--px-path-guide-current-connector-color, $select-blue-default);
+  }
+}
+
+.complete {
+  /* If current step is bigger than normal step, we need extra margin to keep things vertically aligned */
+  &.step-wrapper {
+    margin-top: calc( var(--complete-step-diameter) - var(--step-diameter) );
+  }
+
+  .step-icon {
+    width: var(--complete-step-diameter);
+    height: var(--complete-step-diameter);
+    border-radius: var(--complete-step-border-radius);
+    border-color: var(--px-path-guide-complete-step-border-color, $select-blue-default);
+    background-color: var(--px-path-guide-complete-step-fill-color, $white);
+  }
+
+  iron-icon {
+    --iron-icon-width: var(--px-path-guide-complete-icon-size, 14px);
+    --iron-icon-height: var(--px-path-guide-complete-icon-size, 14px);
+    --iron-icon-fill-color: var(--px-path-guide-complete-icon-color, $select-blue-default);
+  }
+
+  .step-label {
+    top: calc( var(--complete-step-diameter) / 2);
+    color: var(--px-path-guide-complete-step-label-color, $black);
+    font-weight: var(--px-path-guide-complete-step-label-font-weight, normal);
+  }
+
+  .step-connector {
+    background-color: var(--px-path-guide-complete-connector-color, $select-blue-default);
+  }
 }
 
 .path-label {
-  display: inline-block;
   margin-right: var(--px-path-guide-path-label-margin-right, 20px);
   color: var(--px-path-guide-path-label-color, #333);
   font-size: var(--px-path-guide-path-label-font-size, 12px);
