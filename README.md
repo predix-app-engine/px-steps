@@ -7,7 +7,7 @@
 --px-path-guide-border-size: 2px;
 
 ### Default Step Styles
---px-path-guide-step-diameter: 20px
+--px-path-guide-step-diameter: 20px;
 --px-path-guide-step-border-radius: 10px;
 --px-path-guide-step-border-color: $gray4;
 --px-path-guide-step-fill-color: $gray3;
