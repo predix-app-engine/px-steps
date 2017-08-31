@@ -82,10 +82,10 @@ The following custom properties are available for styling (shown with their corr
     <style include="px-stepper-styles"></style>
 
     <div class="container flex flex--row flex--center flex--middle">
-      <template is="dom-repeat" items="[[steps]]">
+      <template id="steps" is="dom-repeat" items="[[steps]]">
         <div class$="step-wrapper [[_getStepState(item)]]">
           <div class="step-connector"></div>
-          <div class="step-item" on-click="_itemClick">
+          <div id="step-item-[[item.id]]" class="step-item" on-click="_itemClick">
             <div class="step-icon">
               <px-icon icon="px-nav:[[_getIcon(item)]]"></px-icon>
             </div>
@@ -116,6 +116,10 @@ The following custom properties are available for styling (shown with their corr
           observer: '_onPropertyChange'
         },
 
+        currentStep: {
+          type: Number
+        },
+
         /**
           * The name of the event that is dispatched from the browser's 'window' object when a step is clicked on.  The event is populated with a
           * 'payload' object property, with an attribute of 'id' whose value is that of the similarly-named attribute in the corresponding step in
@@ -125,9 +129,79 @@ The following custom properties are available for styling (shown with their corr
         stepClickEventName: ''
       },
 
+      ready: function() {
+        // If currentStep is not defined, set it based on the array
+        if (this.steps && this.steps.length && !this.currentStep) {
+          this.currentStep = this._findCurrentStep();
+        }
+      },
+
+      // Helper functions
+
+      complete: function() {
+        if ( !this.steps || this.steps.length <= 0 ) {
+          console.error("Can't complete step: the steps array is empty or undefined.");
+          return;
+        }
+        // Set current step to complete
+        this.steps[this.currentStep].complete = true;
+
+        // Select next step, if there is one
+        if ( this.currentStep < this.steps.length-1) {
+          this.next();
+        }
+      },
+
+      next: function() {
+        if ( !this.steps || this.steps.length <= 0 ) {
+          console.error("Can't select next step: the steps array is empty or undefined.");
+          return;
+        }
+        if ( this.currentStep + 1 > this.steps.length ) {
+          console.error("Can't select next step: you are already at the last step.")
+        }
+        this.jumpToStep( this.currentStep + 1 );
+      },
+
+      previous: function() {
+        if ( !this.steps || this.steps.length <= 0 ) {
+          console.error("Can't select next step: the steps array is empty or undefined.");
+          return;
+        }
+        if ( this.currentStep === 0 ) {
+          console.error("Can't select previous step: you are already at the first step.")
+          return;
+        }
+        this.jumpToStep( this.currentStep - 1 );
+      },
+
+      jumpToStep: function(step) {
+        if ( !this.steps || !this.steps[step] ) {
+          console.error("Can't jump to step '" + step + "'; that step doesn't exist.");
+          return;
+        }
+        this.steps[this.currentStep].current = false;
+        this.currentStep = step;
+        this.steps[this.currentStep].current = true;
+        this._onPropertyChange();
+      },
+
       _onPropertyChange: function() {
-        //this.$.steps.render();
-        //this.updateStyles();
+        this._findCurrentStep(); // Update current step
+        this.$.steps.render();
+        this.updateStyles();
+      },
+
+      _findCurrentStep: function() {
+        if (!this.steps || this.steps.length <= 0) {
+          return -1;
+        }
+        for(var i = 0; i < this.steps.length; ++i) {
+          if( this.steps[i].current ) {
+            return i;
+          }
+        }
+        return -1;
       },
 
       _getIcon: function(item) {
