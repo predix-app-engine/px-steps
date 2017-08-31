@@ -39,9 +39,15 @@
       <!-- Component -->
       <px-demo-component style="width: 100%;">
         <px-stepper
+            id="stepper"
             steps="[[props.steps.value]]"
             step-click-event-name="[[props.stepClickEventName.value]]">
         </px-stepper>
+        <div style="margin-top: 60px; margin-left: 90px; font-size: 18px;">
+          <button class="btn" on-click="next">Next</button>
+          <button class="btn" on-click="previous">Previous</button>
+          <button class="btn" on-click="complete">Complete Current Step</button>
+        </div>
         <div style="margin-top: 60px; margin-left: 90px; font-size: 18px;">
           Click on a step.
         </div>
@@ -144,6 +150,18 @@
         inputType: 'text',
         inputPlaceholder: 'STEP_CLICK'
       }
+    },
+
+    next: function() {
+      this.$.stepper.next();
+    },
+
+    previous: function() {
+      this.$.stepper.previous();
+    },
+
+    complete: function() {
+      this.$.stepper.complete();
     },
 
     ready: function() {
