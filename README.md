@@ -1,68 +1,11 @@
-# px-path-guide
-[![Build Status](https://travis-ci.org/PredixDev/px-path-guide.svg?branch=master)](https://travis-ci.org/PredixDev/px-path-guide)
+# px-stepper
+[![Build Status](https://travis-ci.org/PredixDev/px-stepper.svg?branch=master)](https://travis-ci.org/PredixDev/px-stepper)
 
-## Custom Styles
-
---px-path-guide-connector-length: 120px;<br/>
---px-path-guide-border-size: 2px;
-
-### Default Step Styles
---px-path-guide-step-diameter: 20px;<br/>
---px-path-guide-step-border-radius: 10px;<br/>
---px-path-guide-step-border-color: $gray4;<br/>
---px-path-guide-step-fill-color: $gray3;<br/>
---px-path-guide-connector-color: $gray4;
-
-### Default Icon Styles
---px-path-guide-icon-size: 14px;<br/>
---px-path-guide-icon-color: #333;
-
-### Step Label Styles
---px-path-guide-step-label-font-size: 15px;<br/>
---px-path-guide-step-label-font-weight: normal;<br/>
---px-path-guide-step-label-color: $black;
-
-### 'Current' State Styles
---px-path-guide-current-step-diameter: 24px;<br/>
---px-path-guide-current-step-border-radius: 12px;<br/>
---px-path-guide-current-step-border-color: $select-blue-default;<br/>
---px-path-guide-current-step-fill-color: $white;<br/>
---px-path-guide-current-connector-color: $select-blue-default;
-
-### 'Current' Icon Styles
---px-path-guide-current-icon-size: 14px;<br/>
---px-path-guide-current-icon-color: $select-blue-default;
-
-### 'Current' Label Styles
---px-path-guide-current-step-label-color: $black;<br/>
---px-path-guide-current-step-label-font-weight: bold;
-
-### 'Complete' State Styles
---px-path-guide-complete-step-diameter: 20px;<br/>
---px-path-guide-complete-step-border-radius: 10px;<br/>
---px-path-guide-complete-step-border-color: $select-blue-default;<br/>
---px-path-guide-complete-step-fill-color: $white;<br/>
---px-path-guide-complete-connector-color: $select-blue-default;
-
-### 'Complete' Icon Styles
---px-path-guide-complete-icon-size: 14px;<br/>
---px-path-guide-complete-icon-size: 14px;<br/>
---px-path-guide-complete-icon-color: $select-blue-default;
-
-### 'Complete' Label Styles
---px-path-guide-complete-step-label-color: $black;<br/>
---px-path-guide-complete-step-label-font-weight: normal;
-
-### Path Label Styles
---px-path-guide-path-label-margin-right: 20px;<br/>
---px-path-guide-path-label-color: #333;<br/>
---px-path-guide-path-label-font-size: 12px;
-
-px-path-guide is a Polymer web component that is a visual representation of any sequence of steps and progress made on those steps.  It can show which steps have been completed, the current step, and remaining steps, for example.  Its visual details (nodes, connecting lines, icons, fonts, etc.) can be styled using custom CSS properties (shown in red in the above diagram).
+px-stepper is a Polymer web component that is a visual representation of any sequence of steps and progress made on those steps.  It can show which steps have been completed, the current step, and remaining steps, for example.  Its visual details (nodes, connecting lines, icons, fonts, etc.) can be styled using custom CSS properties (shown in red in the above diagram).
 
 ## Overview
 
-Use the px-path-guide to represent any sequence of steps in a process.  An example of a process is user account creation, which can consist of this sequence of steps: 1. Sign Up, 2. Email Confirmation, 3. Account Activation and 4. Account Configuration.  px-path-guide can represent this process with a sequence of nodes (circles by default) corresponding to the steps.  Each step is labeled accordingly.  px-path-guide can place connector lines between adjacent steps.  Each step's completion state can be symbolized by a font-awesome icon, like a checkmark ('fa-check') for a completed step.
+Use the px-stepper to represent any sequence of steps in a process.  An example of a process is user account creation, which can consist of this sequence of steps: 1. Sign Up, 2. Email Confirmation, 3. Account Activation and 4. Account Configuration.  px-stepper can represent this process with a sequence of nodes corresponding to the steps.  Each step is labeled accordingly.  px-stepper can place connector lines between adjacent steps.
 
 ## Usage
 
@@ -77,18 +20,18 @@ Use the px-path-guide to represent any sequence of steps in a process.  An examp
 First, install the component via bower on the command line.
 
 ```
-bower install px-path-guide --save
+bower install px-stepper --save
 ```
 Second, import the component to your application with the following tag in your head.
 
 ```
-<link rel="import" href="/bower_components/px-path-guide/px-path-guide.html"/>
+<link rel="import" href="/bower_components/px-stepper/px-stepper.html"/>
 ```
 
 Finally, use the component in your application:
 
 ```
-<px-path-guide></px-path-guide>
+<px-stepper></px-stepper>
 ```
 
 <br />
@@ -96,7 +39,7 @@ Finally, use the component in your application:
 
 ## Documentation
 
-Read the full API and view the demo [here](https://predixdev.github.io/px-path-guide).
+Read the full API and view the demo [here](https://predixdev.github.io/px-stepper).
 
 ## Using Events
 
@@ -138,4 +81,4 @@ By default gulp serve is configured to enable LiveReload and will be watching fo
 
 ## Known Issues
 
-Please use [Github Issues](https://github.com/PredixDev/px-path-guide/issues) to submit any bugs you might find.
+Please use [Github Issues](https://github.com/PredixDev/px-stepper/issues) to submit any bugs you might find.
