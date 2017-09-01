@@ -30,11 +30,11 @@ A Polymer component that visualizes step sequences and progress made on them.
 An array that should contain the steps and the details on each.  It has the following structure as demonstrated by this example:
 
     steps: [
-      { id: 1, label: "Basic Information", completed: true, current: false},
-      { id: 2, label: "Select Services", completed: true, current: false},
-      { id: 3, label: "Billing", completed: false, current: true},
-      { id: 4, label: "Review", completed: false, current: false},
-      { id: 5, label: "Deploy", completed: false, current: false}
+      { id: 1, label: "Basic Information", completed: true},
+      { id: 2, label: "Select Services", completed: true},
+      { id: 3, label: "Billing", current: true},
+      { id: 4, label: "Review"},
+      { id: 5, label: "Deploy"}
     ]
 
 In the above structure, for each step object: __"id"__ is a unique identifier, __"label"__ is used as the title
@@ -117,10 +117,7 @@ The following custom properties are available for styling (shown with their corr
 
 
       ready: function() {
-        // If currentStep is not defined, set it based on the array
-        if (this.steps && this.steps.length && !this.currentStep) {
-          this.currentStep = this._findCurrentStep();
-        }
+
       },
 
       // Helper functions
@@ -179,6 +176,11 @@ The following custom properties are available for styling (shown with their corr
       },
 
       _onPropertyChange: function() {
+        // If currentStep is not defined, set it based on the array
+        if (this.steps && this.steps.length && !this.currentStep) {
+          this.currentStep = this._findCurrentStep();
+        }
+
         this.$.steps.render();
         this.updateStyles();
       },

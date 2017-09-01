@@ -48,9 +48,6 @@
           <button class="btn" on-click="previous">Previous</button>
           <button class="btn" on-click="complete">Complete Current Step</button>
         </div>
-        <div style="margin-top: 60px; margin-left: 90px; font-size: 18px;">
-          Click on a step.
-        </div>
         <template is="dom-if" if="[[clicked]]">
           <div style="margin-top: 15px; margin-left: 90px; font-size: 18px;">
             You clicked on step with id [[lastIDClicked]]
@@ -113,11 +110,11 @@
            return [
              { configName: "Default",
                steps: [
-                 { id: 1, label: "Basic Information", completed: true, current: false},
-                 { id: 2, label: "Select Services", completed: true, current: false},
-                 { id: 3, label: "Billing", completed: false, current: true},
-                 { id: 4, label: "Review", completed: false, current: false},
-                 { id: 5, label: "Deploy", completed: false, current: false}
+                 { id: 1, label: "Basic Information", completed: true},
+                 { id: 2, label: "Select Services", completed: true},
+                 { id: 3, label: "Billing", current: true},
+                 { id: 4, label: "Review" },
+                 { id: 5, label: "Deploy" }
                ],
                stepClickEventName: 'STEP_CLICK'
              }
@@ -135,11 +132,11 @@
       steps: {
         type: Array,
         value: [
-          { id: 1, label: "Basic Information", completed: true, current: false},
-          { id: 2, label: "Select Services", completed: true, current: false},
-          { id: 3, label: "Billing", completed: false, current: true},
-          { id: 4, label: "Review", completed: false, current: false},
-          { id: 5, label: "Deploy", completed: false, current: false}
+          { id: 1, label: "Basic Information", completed: true},
+          { id: 2, label: "Select Services", completed: true},
+          { id: 3, label: "Billing", current: true},
+          { id: 4, label: "Review" },
+          { id: 5, label: "Deploy" }
         ],
         inputType: 'code:JSON'
       },
