@@ -12,12 +12,6 @@ A Polymer component that visualizes step sequences and progress made on them.
 
     <px-stepper steps="[[steps]]"></px-stepper>
 
-#### Common:
-
-    <px-stepper
-        steps="[[steps]]">
-    </px-stepper>
-
 #### Complete:
     <style id="px-stepper-custom-styles">
     :host {
@@ -48,14 +42,6 @@ for the step, __"completed"__ indicates if a step is completed, and __"current"_
 against having more than one current step, it is more realistic that there is only one current step, and that all steps to previous to the
 current one are completed.  A step is not required to be completed or current; it can be neither.
 In the above example, the first 2 steps are complete, Step 3 is current and Step 4 is neither completed nor the current step.
-
-#### __completed-step-icon__
-
-The name of the font-awesome icon to be placed inside the step node (which is a circle, by default) for a completed step.
-
-#### __current-step-icon__
-
-The name of the font-awesome icon to be placed inside the step shape (circle, by default) for the current step.
 
 #### __step-click-event-name__
 
@@ -129,6 +115,7 @@ The following custom properties are available for styling (shown with their corr
         stepClickEventName: ''
       },
 
+
       ready: function() {
         // If currentStep is not defined, set it based on the array
         if (this.steps && this.steps.length && !this.currentStep) {
@@ -144,7 +131,7 @@ The following custom properties are available for styling (shown with their corr
           return;
         }
         // Set current step to complete
-        this.steps[this.currentStep].complete = true;
+        this.steps[this.currentStep].completed = true;
 
         // Select next step, if there is one
         if ( this.currentStep < this.steps.length-1) {
@@ -184,10 +171,14 @@ The following custom properties are available for styling (shown with their corr
         this.currentStep = step;
         this.steps[this.currentStep].current = true;
         this._onPropertyChange();
+
+        // This is how I get Polymer to register the data change and re-render the steps
+        var refresh = this.steps;
+        this.steps = [];
+        this.steps = refresh;
       },
 
       _onPropertyChange: function() {
-        this._findCurrentStep(); // Update current step
         this.$.steps.render();
         this.updateStyles();
       },
