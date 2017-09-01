@@ -54,6 +54,7 @@ Predix branding rules go in px-path-guide-predix.scss, not in this file.
 
     &.current {
       color: $select-default;
+      font-weight: bold;
 
       .step-connector {
         background-color: $select-default;
@@ -79,8 +80,8 @@ Predix branding rules go in px-path-guide-predix.scss, not in this file.
     .step-connector {
       position: absolute;
       height: 1px;
-      width: calc(100% - 32px); /* 32px = 22px (icon) + 10px (5px horizontal padding) */
-      margin: 0 16px; /* 16px = 11px (1/2 icon) + 5px (5px horizontal padding) */
+      width: calc(100% - 27px); /* 27px = 22px (icon) + 5px (left margin) */
+      margin-left: 16px; /* 16px = 11px (1/2 icon) + 5px (left margin) */
       left: -50%;
       top: 11px; /* This is hard-coded based on the height of the icon */
       background-color: rgba( $gray10, .6 );
@@ -88,6 +89,10 @@ Predix branding rules go in px-path-guide-predix.scss, not in this file.
 
     .step-item {
       min-width: 160px;
+    }
+
+    .step-label {
+      padding-top: 5px;
     }
   }
 
