@@ -40,7 +40,7 @@ Predix branding rules go in px-path-guide-predix.scss, not in this file.
 .container {
   height: 150px;
   padding: 0 30px;
-  background-color: var(--px-stepper-backbround-color, $gray1);
+  background-color: var(--px-stepper-background-color, $gray1);
 
   .step-wrapper {
     position: relative; /* Because we are absolutely positioning the connector */
@@ -99,21 +99,4 @@ Predix branding rules go in px-path-guide-predix.scss, not in this file.
   .step-wrapper:first-of-type .step-connector {
     display: none;
   }
-}
-
-
-
-.old {
-  .step-item {
-    position: relative; /* Necessary to get the z-index to work */
-    z-index: 10;
-  }
-
-  .step-connector {
-    top: calc( var(--step-diameter) / 2);
-    left: calc( var(--step-length) / -2);
-
-    z-index: 1;
-  }
-
 }

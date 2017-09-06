@@ -15,6 +15,7 @@ A Polymer component that visualizes step sequences and progress made on them.
 #### Complete:
     <style id="px-stepper-custom-styles">
     :host {
+      --px-stepper-background-color: $white;
     }
     </style>
     <px-stepper
@@ -53,12 +54,11 @@ event is dispatched, the Event object will have a __"payload"__ attribute with t
     }
 
 In the above, __"id"__ will have the matching id attribute (from the __steps__ array) of the step that was clicked on.
-
-
 ### Styling
+
 The following custom properties are available for styling (shown with their corresponding default values):
 
-
+--px-stepper-background-color: $gray1;
 
 -->
 
