@@ -49,7 +49,7 @@ Predix branding rules go in px-path-guide-predix.scss, not in this file.
     max-width: 232px; /* Why 232? 200 + 22 (icon) + 10 (connector margins) */
     text-align: center;
 
-    color: rgba( $gray10, .6 );
+    color: rgba( $gray8, .6 );
     cursor: pointer;
 
     &.current {
@@ -58,6 +58,10 @@ Predix branding rules go in px-path-guide-predix.scss, not in this file.
 
       .step-connector {
         background-color: $select-default;
+      }
+
+      .step-icon {
+        stroke-width: 2;
       }
     }
 
@@ -70,18 +74,18 @@ Predix branding rules go in px-path-guide-predix.scss, not in this file.
     }
 
     :hover {
-      color: $primary-default;
+      color: $select-hover;
     }
 
     :active {
-      color: $primary-pressed;
+      color: $select-pressed;
     }
 
     .step-connector {
       position: absolute;
       height: 1px;
-      width: calc(100% - 27px); /* 27px = 22px (icon) + 5px (left margin) */
-      margin-left: 16px; /* 16px = 11px (1/2 icon) + 5px (left margin) */
+      width: calc(100% - 22px); /* 22px = icon width */
+      margin-left: 11px; /* 11px = 1/2 icon width */
       left: -50%;
       top: 11px; /* This is hard-coded based on the height of the icon */
       background-color: rgba( $gray10, .6 );

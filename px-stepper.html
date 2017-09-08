@@ -67,19 +67,20 @@ The following custom properties are available for styling (shown with their corr
   <template id="pxStepperTemplate">
     <style include="px-stepper-styles"></style>
 
-    <div class="container flex flex--row flex--center flex--middle">
-      <template id="steps" is="dom-repeat" items="[[steps]]">
-        <div class$="step-wrapper [[_getStepState(item)]]">
-          <div class="step-connector"></div>
-          <div id="step-item-[[item.id]]" class="step-item" on-click="_itemClick">
-            <div class="step-icon">
-              <px-icon icon="px-nav:[[_getIcon(item)]]"></px-icon>
+    <div class="container flex flex--middle">
+      <div class="inner-container flex flex--row flex--center flex--top">
+        <template id="steps" is="dom-repeat" items="[[steps]]">
+          <div class$="step-wrapper [[_getStepState(item)]]">
+            <div class="step-connector"></div>
+            <div id="step-item-[[item.id]]" class="step-item" on-click="_itemClick">
+              <div class="step-icon">
+                <px-icon icon="px-nav:[[_getIcon(item)]]"></px-icon>
+              </div>
+              <div class="step-label">[[item.label]]</div>
             </div>
-            <div class="step-label">[[item.label]]</div>
-          </div>
-        <div>
-      </template>
-
+          <div>
+        </template>
+      </div>
     </div>
 
   </template>
