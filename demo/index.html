@@ -40,6 +40,7 @@
       <!-- Component ---------------------------------------------------------->
       <px-demo-component>
         <px-path-guide
+          id="stepper"
           style="display: inline-block; margin-top: 50px; margin-left: 100px;"
           current-step-icon="{{props.currentStepIcon.value}}"
           completed-step-icon="{{props.completedStepIcon.value}}"
@@ -47,6 +48,11 @@
           path-label="[[props.label.value]]"
           step-click-event-name="[[props.stepClickEventName.value]]">
         </px-path-guide>
+        <div style="margin-top: 60px; margin-left: 90px; font-size: 18px;">
+          <button class="btn" on-click="next">Next</button>
+          <button class="btn" on-click="previous">Previous</button>
+          <button class="btn" on-click="complete">Complete Current Step</button>
+        </div>
         <div style="margin-top: 60px; margin-left: 90px; font-size: 18px;">
           Click on a step.
         </div>
@@ -112,10 +118,10 @@
            return [
              { configName: "Default",
                steps: [
-                 { id: 1, label: "Step 1", completed: true, current: false},
-                 { id: 2, label: "Step 2", completed: true, current: false},
-                 { id: 3, label: "Step 3", completed: false, current: true},
-                 { id: 4, label: "Step 4", completed: false, current: false}
+                 { id: 1, label: "Step 1", completed: true,},
+                 { id: 2, label: "Step 2", completed: true},
+                 { id: 3, label: "Step 3", current: true},
+                 { id: 4, label: "Step 4" }
                ],
                completedStepIcon: 'fa-check',
                currentStepIcon: 'fa-circle',
@@ -135,10 +141,10 @@
       steps: {
         type: Array,
         value: [
-          { id: 1, label: "Step 1", completed: true, current: false},
-          { id: 2, label: "Step 2", completed: true, current: false},
-          { id: 3, label: "Step 3", completed: false, current: true},
-          { id: 4, label: "Step 4", completed: false, current: false}
+          { id: 1, label: "Step 1", completed: true},
+          { id: 2, label: "Step 2", completed: true},
+          { id: 3, label: "Step 3", current: true},
+          { id: 4, label: "Step 4"}
         ],
         inputType: 'code:JSON'
       },
@@ -170,6 +176,18 @@
         inputType: 'text',
         inputPlaceholder: 'label'
       }
+    },
+
+    next: function() {
+      this.$.stepper.next();
+    },
+
+    previous: function() {
+      this.$.stepper.previous();
+    },
+
+    complete: function() {
+      this.$.stepper.complete();
     },
 
     ready: function() {
