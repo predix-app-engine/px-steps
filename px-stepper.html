@@ -135,6 +135,10 @@ The following custom properties are available for styling (shown with their corr
         if ( this.currentStep < this.steps.length-1) {
           this.next();
         }
+        // If this is the last step, force re-render to update the component
+        if ( this.currentStep === this.steps.length-1) {
+          this._forceReRender();
+        }
       },
 
       next: function() {
@@ -168,12 +172,9 @@ The following custom properties are available for styling (shown with their corr
         this.steps[this.currentStep].current = false;
         this.currentStep = step;
         this.steps[this.currentStep].current = true;
-        this._onPropertyChange();
 
-        // This is how I get Polymer to register the data change and re-render the steps
-        var refresh = this.steps;
-        this.steps = [];
-        this.steps = refresh;
+        this._onPropertyChange();
+        this._forceReRender();
       },
 
       _onPropertyChange: function() {
@@ -184,6 +185,13 @@ The following custom properties are available for styling (shown with their corr
 
         this.$.steps.render();
         this.updateStyles();
+      },
+
+      _forceReRender: function() {
+        // This is how I get Polymer to register the data change and re-render the steps
+        var refresh = this.steps;
+        this.steps = [];
+        this.steps = refresh;
       },
 
       _findCurrentStep: function() {
