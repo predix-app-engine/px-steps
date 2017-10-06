@@ -1,8 +1,8 @@
 {
-  "name": "px-path-guide",
-  "version": "0.0.4",
+  "name": "px-steps",
+  "version": "1.0.1",
   "description": "Polymer component to visually represent a sequence of steps and associated progress details.",
-  "main": "px-path-guide.html",
+  "main": "px-steps.html",
   "ignore": [
     ".*",
     "npm-debug.log",
@@ -13,16 +13,15 @@
     "test",
     "OSS_Notice.pdf",
     "scripts",
-    ".github",
-    "px-path-guide.png"
+    ".github"
   ],
   "dependencies": {
-    "polymer": "^1.6.1",
-    "iron-icon": "^1.0.12",
-    "px-polymer-font-awesome": "^1.1.0"
+    "polymer": "^1.9.1",
+    "px-normalize-design": "^1.0.2",
+    "px-flexbox-design": "^1.0.2",
+    "px-icon-set": "^2.0.9"
   },
   "devDependencies": {
-    "px-starter-kit-design": "^0.7.0",
-    "px-demo": "^1.4.6"
+    "px-demo": "^2.3.1"
   }
 }
