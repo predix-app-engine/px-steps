@@ -1,3 +1,7 @@
+v1.0.2
+==================
+* fix wct version
+
 v1.0.1
 ==================
 * merge code review with contribution
