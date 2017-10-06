@@ -37,6 +37,6 @@
     }
   },
   "suites": [
-    "test/px-path-guide-test-fixture.html"
+    "test/px-steps-test-fixture.html"
   ]
 }

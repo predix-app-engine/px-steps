@@ -1,11 +1,11 @@
-# px-stepper
-[![Build Status](https://travis-ci.org/PredixDev/px-stepper.svg?branch=master)](https://travis-ci.org/PredixDev/px-stepper)
+# px-steps
+[![Build Status](https://travis-ci.org/PredixDev/px-steps.svg?branch=master)](https://travis-ci.org/PredixDev/px-steps)
 
-px-stepper is a Polymer web component that is a visual representation of any sequence of steps and progress made on those steps.  It can show which steps have been completed, the current step, and remaining steps, for example.  Its visual details (nodes, connecting lines, icons, fonts, etc.) can be styled using custom CSS properties (shown in red in the above diagram).
+px-steps is a Polymer web component that is a visual representation of any sequence of steps and progress made on those steps.  It can show which steps have been completed, the current step, and remaining steps, for example.  Its visual details (nodes, connecting lines, icons, fonts, etc.) can be styled using custom CSS properties (shown in red in the above diagram).
 
 ## Overview
 
-Use the px-stepper to represent any sequence of steps in a process.  An example of a process is user account creation, which can consist of this sequence of steps: 1. Sign Up, 2. Email Confirmation, 3. Account Activation and 4. Account Configuration.  px-stepper can represent this process with a sequence of nodes corresponding to the steps.  Each step is labeled accordingly.  px-stepper can place connector lines between adjacent steps.
+Use the px-steps to represent any sequence of steps in a process.  An example of a process is user account creation, which can consist of this sequence of steps: 1. Sign Up, 2. Email Confirmation, 3. Account Activation and 4. Account Configuration.  px-steps can represent this process with a sequence of nodes corresponding to the steps.  Each step is labeled accordingly.  px-steps can place connector lines between adjacent steps.
 
 ## Usage
 
@@ -20,18 +20,18 @@ Use the px-stepper to represent any sequence of steps in a process.  An example 
 First, install the component via bower on the command line.
 
 ```
-bower install px-stepper --save
+bower install px-steps --save
 ```
 Second, import the component to your application with the following tag in your head.
 
 ```
-<link rel="import" href="/bower_components/px-stepper/px-stepper.html"/>
+<link rel="import" href="/bower_components/px-steps/px-steps.html"/>
 ```
 
 Finally, use the component in your application:
 
 ```
-<px-stepper></px-stepper>
+<px-steps></px-steps>
 ```
 
 <br />
@@ -39,7 +39,7 @@ Finally, use the component in your application:
 
 ## Documentation
 
-Read the full API and view the demo [here](https://predixdev.github.io/px-stepper).
+Read the full API and view the demo [here](https://predixdev.github.io/px-steps).
 
 ## Using Events
 
@@ -81,4 +81,4 @@ By default gulp serve is configured to enable LiveReload and will be watching fo
 
 ## Known Issues
 
-Please use [Github Issues](https://github.com/PredixDev/px-stepper/issues) to submit any bugs you might find.
+Please use [Github Issues](https://github.com/PredixDev/px-steps/issues) to submit any bugs you might find.

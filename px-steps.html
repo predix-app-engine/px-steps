@@ -1,0 +1,205 @@
+<link rel="import" href="../polymer/polymer.html"/>
+<link rel="import" href="../px-icon-set/px-icon-set.html"/>
+<link rel="import" href="../px-icon-set/px-icon.html"/>
+<link rel="import" href="css/px-steps-styles.html"/>
+
+<!--
+
+### Usage
+
+    <px-steps items='[{ id: "1", label: "Select Services"},{ id: "2", label: "Billing"}]'></px-steps>
+
+### Styling
+
+The following custom properties are available for styling (shown with their corresponding default values):
+
+Custom property | Description
+:----------------|:-------------
+`--px-steps-connector-color` | Color for the connecting lines / bubbles
+`--px-steps-text-color` | Default text color for uncompleted and inactive steps
+`--px-steps-text-color--hover` | Text color for steps when hovered
+`--px-steps-text-color--pressed` | Text color for steps when pressed
+`--px-steps-text-color--current` | Text color for the current highlighted step
+`--px-steps-text-color--completed` | Text color for the completed steps
+`--px-steps-min-width` | Minimum width of each step in the stepper
+
+-->
+
+<dom-module id="px-steps">
+  <template id="pxStepsTemplate">
+    <style include="px-steps-styles"></style>
+
+    <div class="container flex flex--top">
+      <template id="steps" is="dom-repeat" items="[[items]]">
+        <div class$="step-wrapper [[_getStepState(item,index,currentStep,completed)]]">
+          <div class="step-connector"></div>
+          <div id="[[item.id]]" class="step-item" on-tap="_handleTap">
+            <div class="step-icon">
+              <px-icon icon="px-nav:[[_getIcon(item,completed,completed.*)]]"></px-icon>
+            </div>
+            <div class="step-label">[[item.label]]</div>
+          </div>
+        </div>
+      </template>
+    </div>
+
+  </template>
+
+  <script>
+    Polymer({
+      is: 'px-steps',
+
+      properties: {
+        /**
+          * An array of steps and their details. If empty, the component is not rendered.
+          * The structure should be:
+          *
+          *      [{ id: String, label: String }, ... ]
+          * @property steps
+          */
+        items: {
+          type: Array,
+          value: function () {
+            return [];
+          },
+          observer: '_updateItems'
+        },
+        /**
+        * An array of IDs corresponding to items in the steps array which
+        * should be marked as completed.
+        * @property completed
+        */
+        completed: {
+          type: Array,
+          value: function () {
+            return [];
+          }
+        },
+        /**
+         * The array index of the currently active step.
+         * @property currentStep
+         */
+        currentStep: {
+          type: Number,
+          value: 0
+        }
+      },
+      /**
+       * Sets the current step to complete and advances to the next step.
+       * @method complete
+       */
+      complete: function () {
+        if (!this.items || this.items.length <= 0) {
+          console.warn("Can't complete step: the steps array is empty or undefined.");
+          return;
+        }
+        var id = this.items[this.currentStep].id;
+        if (this.completed.indexOf(id) === -1) {
+          this.push('completed', id);
+        }
+
+        // Select next step, if there is one
+        if (this.currentStep < this.items.length) {
+          this.next();
+        }
+      },
+      /**
+       * Go forward one step.
+       * @method next
+       */
+      next: function () {
+        if (!this.items || this.items.length === 0) {
+          console.warn("Can't select next step: the steps array is empty or undefined.");
+          return;
+        }
+        if (this.currentStep === this.items.length - 1) {
+          console.warn("Can't select next step: you are already at the last step.")
+          return;
+        }
+        this.currentStep++;
+      },
+      /**
+       * Go back one step.
+       * @method previous
+       */
+      previous: function () {
+        if (!this.items || this.items.length === 0) {
+          console.warn("Can't select previous step: the steps array is empty or undefined.");
+          return;
+        }
+        if (this.currentStep === 0) {
+          console.warn("Can't select previous step: you are already at the first step.")
+          return;
+        }
+        this.currentStep--;
+      },
+      /**
+       * Jump to an arbitrary step by index.
+       * @method jumpToStep
+       * @param {Number} step
+       */
+      jumpToStep: function (id) {
+        if (!this.items || !this.items[id]) {
+          console.warn("Can't jump to step '" + id + "'; that step doesn't exist.");
+          return;
+        }
+        this.currentStep = id;
+      },
+      /**
+      * Calculates which icon to display for a given node.
+      * @method _getIcon
+      * @param {Object} item
+      * @param {Array} completed
+      */
+      _getIcon: function (item, completed) {
+        return this.completed.indexOf(item.id) > -1 ? "confirmed" : "unconfirmed";
+      },
+      /**
+      * Calculates which class to assign to a given node.
+      * @method _getStepState
+      * @param {Object} item
+      * @param {Number} index
+      * @param {Number} currentStep
+      * @param {Array} completed
+      */
+      _getStepState: function (item, index, currentStep, completed) {
+        if (index === currentStep) {
+          return 'current';
+        } else if (completed.indexOf(item.id) > -1) {
+          return 'complete';
+        }
+      },
+      /**
+      * Fires an event when a node is tapped upon.
+      * @method _handleTap
+      * @param {Event} event
+      */
+      _handleTap: function (event) {
+        var id = event.currentTarget.id;
+        /**
+         * Event fired when a step in the px-steps is tapped.
+         * Event.detail will contain the id of the step, e.g.
+         *
+         *      { id : "3" }
+         * You should intercept this event, perform any necessary
+         * validation or saving on the current step in the process,
+         * decide if the user is allowed to navigate to that step,
+         * and then use the `jumpToStep` method to actually change steps.
+         * @event px-steps-tapped
+         */
+        this.fire('px-steps-tapped', { "id": id });
+      },
+      /**
+       * Handles updates to the items array by un-assigning and re-assigning
+       * the value to trigger the dom-repeat to re-render.
+       */
+      _updateItems: function(newValue, oldValue) {
+        if(newValue && oldValue && JSON.stringify(newValue) !== JSON.stringify(oldValue)) {
+          this.set('items', []);
+          this.set('items', newValue);
+        }
+      }
+
+    });
+  </script>
+</dom-module>
