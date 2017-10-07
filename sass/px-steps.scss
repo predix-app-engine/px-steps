@@ -9,7 +9,6 @@
  */
 
 // Settings
-@import "px-colors-design/_settings.colors.scss";
 
 // Tools
 
@@ -30,7 +29,7 @@
     width: 100%;
     min-width: var(--px-steps-min-width, calculateRem(75px));
     text-align: center;
-    color: var(--px-steps-text-color, rgba($gray8,0.6));
+    color: var(--px-steps-text-color, black);
     cursor: pointer;
     word-break: break-word;
     .step-connector {
@@ -40,7 +39,7 @@
       margin-left: calculateRem(11px); /* 11px = 1/2 icon width */
       top: calculateRem(11px); /* Same as above */
       left: -50%;
-      background-color: var(--px-steps-connector-color, rgba($gray10,0.6));
+      background-color: var(--px-steps-connector-color, black);
     }
     .step-item {
       min-width: var(--px-steps-min-width, calculateRem(75px));
@@ -49,20 +48,20 @@
       padding-top: calculateRem(5px);
     }
     &.current {
-      color: var(--px-steps-text-color--current, $select-default);
+      color: var(--px-steps-text-color--current, blue);
       font-weight: bold;
       .step-icon {
         stroke-width: 2;
       }
     }
     &.complete {
-      color: var(--px-steps-text-color--completed, $gray10);
+      color: var(--px-steps-text-color--completed, darkgray);
     }
     :hover {
-      color: var(--px-steps-text-color--hover, $select-hover);
+      color: var(--px-steps-text-color--hover, blue);
     }
     :active {
-      color: var(--px-steps-text-color--pressed, $select-pressed);
+      color: var(--px-steps-text-color--pressed, blue);
     }
   }
   .step-wrapper:first-of-type .step-connector {

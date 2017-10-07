@@ -1,7 +1,7 @@
 # px-steps
 [![Build Status](https://travis-ci.org/PredixDev/px-steps.svg?branch=master)](https://travis-ci.org/PredixDev/px-steps)
 
-px-steps is a Polymer web component that is a visual representation of any sequence of steps and progress made on those steps.  It can show which steps have been completed, the current step, and remaining steps, for example.  Its visual details (nodes, connecting lines, icons, fonts, etc.) can be styled using custom CSS properties (shown in red in the above diagram).
+px-steps is a Polymer web component that is a visual representation of any sequence of steps and progress made on those steps. It can show which steps have been completed, the current step, and remaining steps, for example.
 
 ## Overview
 
@@ -31,7 +31,7 @@ Second, import the component to your application with the following tag in your 
 Finally, use the component in your application:
 
 ```
-<px-steps></px-steps>
+<px-steps items='[{ id: "1", label: "Select Services"},{ id: "2", label: "Billing"}]'></px-steps>
 ```
 
 <br />

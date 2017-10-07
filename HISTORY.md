@@ -1,3 +1,7 @@
+v1.0.3
+==================
+* fix demo & README, genericize theme
+
 v1.0.2
 ==================
 * fix wct version
