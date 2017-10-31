@@ -1,6 +1,6 @@
 {
   "name": "px-steps",
-  "version": "1.0.5",
+  "version": "1.0.4",
   "description": "Polymer component to visually represent a sequence of steps and associated progress details.",
   "main": "px-steps.html",
   "ignore": [
