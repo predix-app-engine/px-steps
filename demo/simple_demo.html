@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>px-steps simple demo</title>
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="../../polymer/polymer.html" />
+    <link rel="import" href="../px-steps.html" />
+
+    <link rel="import" href="../../px-theme/px-theme-styles.html">
+  </head>
+
+  <body>
+    <custom-style>
+      <style include="px-theme-styles" is="custom-style"></style>
+    </custom-style>
+     <px-steps
+      id="stepper"
+      items='[{"id": "1", "label": "Basic Information"},{ "id": "2", "label": "Select Services"},{ "id": "3", "label": "Billing" },{ "id": "4", "label": "Review" },{ "id": "5", "label": "Deploy" }]'
+      completed='["1","2"]'
+      current-step="2">
+    </px-steps>
+  </body>
+</html>
