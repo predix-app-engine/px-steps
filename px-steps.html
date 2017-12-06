@@ -26,7 +26,7 @@ Custom property | Description
 -->
 
 <dom-module id="px-steps">
-  <template id="pxStepsTemplate">
+  <template>
     <style include="px-steps-styles"></style>
 
     <div class="container flex flex--top">
@@ -55,7 +55,6 @@ Custom property | Description
           * The structure should be:
           *
           *      [{ id: String, label: String }, ... ]
-          * @property steps
           */
         items: {
           type: Array,
@@ -67,7 +66,6 @@ Custom property | Description
         /**
         * An array of IDs corresponding to items in the steps array which
         * should be marked as completed.
-        * @property completed
         */
         completed: {
           type: Array,
@@ -77,7 +75,6 @@ Custom property | Description
         },
         /**
          * The array index of the currently active step.
-         * @property currentStep
          */
         currentStep: {
           type: Number,
@@ -86,7 +83,6 @@ Custom property | Description
       },
       /**
        * Sets the current step to complete and advances to the next step.
-       * @method complete
        */
       complete: function () {
         if (!this.items || this.items.length <= 0) {
@@ -105,7 +101,6 @@ Custom property | Description
       },
       /**
        * Go forward one step.
-       * @method next
        */
       next: function () {
         if (!this.items || this.items.length === 0) {
@@ -120,7 +115,6 @@ Custom property | Description
       },
       /**
        * Go back one step.
-       * @method previous
        */
       previous: function () {
         if (!this.items || this.items.length === 0) {
@@ -135,8 +129,6 @@ Custom property | Description
       },
       /**
        * Jump to an arbitrary step by index.
-       * @method jumpToStep
-       * @param {Number} step
        */
       jumpToStep: function (id) {
         if (!this.items || !this.items[id]) {
@@ -147,20 +139,12 @@ Custom property | Description
       },
       /**
       * Calculates which icon to display for a given node.
-      * @method _getIcon
-      * @param {Object} item
-      * @param {Array} completed
       */
       _getIcon: function (item, completed) {
         return this.completed.indexOf(item.id) > -1 ? "confirmed" : "unconfirmed";
       },
       /**
       * Calculates which class to assign to a given node.
-      * @method _getStepState
-      * @param {Object} item
-      * @param {Number} index
-      * @param {Number} currentStep
-      * @param {Array} completed
       */
       _getStepState: function (item, index, currentStep, completed) {
         if (index === currentStep) {
@@ -171,8 +155,6 @@ Custom property | Description
       },
       /**
       * Fires an event when a node is tapped upon.
-      * @method _handleTap
-      * @param {Event} event
       */
       _handleTap: function (event) {
         var id = event.currentTarget.id;
