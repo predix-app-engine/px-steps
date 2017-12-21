@@ -60,8 +60,7 @@ Custom property | Description
           type: Array,
           value: function () {
             return [];
-          },
-          observer: '_updateItems'
+          }
         },
         /**
         * An array of IDs corresponding to items in the steps array which
@@ -170,18 +169,7 @@ Custom property | Description
          * @event px-steps-tapped
          */
         this.fire('px-steps-tapped', { "id": id });
-      },
-      /**
-       * Handles updates to the items array by un-assigning and re-assigning
-       * the value to trigger the dom-repeat to re-render.
-       */
-      _updateItems: function(newValue, oldValue) {
-        if(newValue && oldValue && JSON.stringify(newValue) !== JSON.stringify(oldValue)) {
-          this.set('items', []);
-          this.set('items', newValue);
-        }
       }
-
     });
   </script>
 </dom-module>
