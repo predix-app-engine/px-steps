@@ -1,3 +1,8 @@
+v1.1.1
+==================
+* Don't force items to re-notify a change
+* Be explicit that `jumpToStep()` takes an item index, not id
+
 v1.1.0
 ==================
 * Polymer 1.x/2.x hybrid element support
