@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Example: px-steps</title>
+
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="../../polymer/polymer.html"/>
+  <link rel="import" href="../../px-theme/px-theme-styles.html"/>
+  <link rel="import" href="../px-steps.html"/>
+</head>
+<body>
+  <custom-style>
+    <style is="custom-style" include="px-theme-styles"></style>
+  </custom-style>
+
+ <px-steps items='[
+     {"id":"1","label":"Basic Information"},
+     {"id":"2","label":"Select Services"},
+     {"id":"3","label":"Billing"},
+     {"id":"4","label":"Review"},
+     {"id":"5","label":"Deploy"}
+   ]'
+   completed='["1","2"]'>
+ </px-steps>
+</body>
+</html>
