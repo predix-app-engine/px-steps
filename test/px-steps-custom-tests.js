@@ -146,7 +146,7 @@ describe('Error tests for px-steps', function () {
   it('throws a warning when it can not jump directly to a step', function () {
     stepper.jumpToStep(7);
     expect(console.warn).to.be.calledOnce;
-    expect(console.warn).to.be.calledWith("Can't jump to step '7'; that step doesn't exist.");
+    expect(console.warn).to.be.calledWith("Can't jump to step at index '7'; that step doesn't exist.");
     expect(stepper.currentStep).to.equal(0);
   });
 

@@ -129,12 +129,12 @@ Custom property | Description
       /**
        * Jump to an arbitrary step by index.
        */
-      jumpToStep: function (id) {
-        if (!this.items || !this.items[id]) {
-          console.warn("Can't jump to step '" + id + "'; that step doesn't exist.");
+      jumpToStep: function (index) {
+        if (!this.items || !this.items[index]) {
+          console.warn("Can't jump to step at index '" + index + "'; that step doesn't exist.");
           return;
         }
-        this.currentStep = id;
+        this.currentStep = index;
       },
       /**
       * Calculates which icon to display for a given node.
