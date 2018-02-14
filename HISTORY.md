@@ -1,3 +1,7 @@
+v1.1.3
+==================
+* add demo helpers css to style demo buttons
+
 v1.1.2
 ==================
 * reduce icon-set imports
