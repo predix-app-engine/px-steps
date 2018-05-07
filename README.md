@@ -39,7 +39,7 @@ Finally, use the component in your application:
 
 ## Documentation
 
-Read the full API and view the demo [here](https://predixdev.github.io/px-steps).
+Read the full API and view the demo [here](https://www.predix-ui.com/#/elements/px-steps).
 
 ## Using Events
 
