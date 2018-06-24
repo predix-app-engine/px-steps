@@ -110,21 +110,22 @@ Custom property | Description
        * Sets the current step to complete and advances to the next step.
        */
       complete: function (index) {
+        const byCurrentStep = index === null || index === undefined;
         if (!this.items || this.items.length <= 0) {
           console.warn("Can't complete step: the steps array is empty or undefined.");
           return;
-        } else if (index && (index > this.items.length - 1 || index < 0)) {
+        } else if (!byCurrentStep && (index > this.items.length - 1 || index < 0)) {
           console.warn("Can't complete to step at index '" + index + "'; that step doesn't exist.");
           return;
         }
 
-        var id = index ? this.items[index].id : this.items[this.currentStep].id;
+        var id = byCurrentStep ? this.items[this.currentStep].id : this.items[index].id;
         if (this.completed.indexOf(id) === -1) {
           this.push('completed', id);
         }
 
         // Select next step, if there is one
-        if (!index && this.currentStep < this.items.length) {
+        if (byCurrentStep && this.currentStep < this.items.length) {
           this.next();
         }
       },
