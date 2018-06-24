@@ -160,8 +160,13 @@ Custom property | Description
 
         var id = this.items[index].id;
         var restrictedIndex = this.restricted.indexOf(id);
-        if (restrictedIndex === -1) {
-          this.set('restricted', this.restricted.slice(restrictedIndex))
+        if (restrictedIndex !== -1) {
+          this.set(
+            'restricted',
+            this.restricted.filter(function(id, index) {
+              return index !== restrictedIndex;
+            })
+          );
         }
       },
       /**
