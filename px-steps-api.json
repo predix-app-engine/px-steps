@@ -8,63 +8,89 @@
       "properties": [
         {
           "name": "items",
-          "type": "Array",
+          "type": "Array | null | undefined",
           "description": "An array of steps and their details. If empty, the component is not rendered.\nThe structure should be:\n\n     [{ id: String, label: String }, ... ]",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 58,
+              "line": 74,
               "column": 8
             },
             "end": {
-              "line": 64,
+              "line": 79,
               "column": 9
             }
           },
           "metadata": {
             "polymer": {
-              "observer": "\"_updateItems\""
+              "attributeType": "Array"
             }
           },
           "defaultValue": "[]"
         },
         {
           "name": "completed",
-          "type": "Array",
+          "type": "Array | null | undefined",
           "description": "An array of IDs corresponding to items in the steps array which\nshould be marked as completed.",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 69,
+              "line": 84,
               "column": 8
             },
             "end": {
-              "line": 74,
+              "line": 89,
               "column": 9
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Array"
+            }
+          },
+          "defaultValue": "[]"
+        },
+        {
+          "name": "restricted",
+          "type": "Array | null | undefined",
+          "description": "An array of IDs corresponding to items in the steps array which\nshould be restricted from navigation.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 94,
+              "column": 8
+            },
+            "end": {
+              "line": 99,
+              "column": 9
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "Array"
+            }
           },
           "defaultValue": "[]"
         },
         {
           "name": "currentStep",
-          "type": "number",
+          "type": "number | null | undefined",
           "description": "The array index of the currently active step.",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 78,
+              "line": 103,
               "column": 8
             },
             "end": {
-              "line": 81,
+              "line": 106,
               "column": 9
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Number"
+            }
           },
           "defaultValue": "0"
         }
@@ -72,20 +98,99 @@
       "methods": [
         {
           "name": "complete",
-          "description": "Sets the current step to complete and advances to the next step.",
+          "description": "Sets the current step, or specified step, to complete and advances to the next step.",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 86,
+              "line": 111,
               "column": 6
             },
             "end": {
-              "line": 100,
+              "line": 130,
               "column": 7
             }
           },
           "metadata": {},
-          "params": []
+          "params": [
+            {
+              "name": "index"
+            }
+          ],
+          "return": {
+            "type": "void"
+          }
+        },
+        {
+          "name": "incomplete",
+          "description": "Sets the current step, or specified step, to incomplete.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 134,
+              "column": 6
+            },
+            "end": {
+              "line": 149,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "index"
+            }
+          ],
+          "return": {
+            "type": "void"
+          }
+        },
+        {
+          "name": "restrict",
+          "description": "Restricts the step at the provided index.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 153,
+              "column": 6
+            },
+            "end": {
+              "line": 167,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "index"
+            }
+          ],
+          "return": {
+            "type": "void"
+          }
+        },
+        {
+          "name": "allow",
+          "description": "Removes restriction on step at provided index.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 171,
+              "column": 6
+            },
+            "end": {
+              "line": 186,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "index"
+            }
+          ],
+          "return": {
+            "type": "void"
+          }
         },
         {
           "name": "next",
@@ -93,16 +198,19 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 104,
+              "line": 190,
               "column": 6
             },
             "end": {
-              "line": 114,
+              "line": 200,
               "column": 7
             }
           },
           "metadata": {},
-          "params": []
+          "params": [],
+          "return": {
+            "type": "void"
+          }
         },
         {
           "name": "previous",
@@ -110,16 +218,19 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 118,
+              "line": 204,
               "column": 6
             },
             "end": {
-              "line": 128,
+              "line": 214,
               "column": 7
             }
           },
           "metadata": {},
-          "params": []
+          "params": [],
+          "return": {
+            "type": "void"
+          }
         },
         {
           "name": "jumpToStep",
@@ -127,20 +238,23 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 132,
+              "line": 218,
               "column": 6
             },
             "end": {
-              "line": 138,
+              "line": 224,
               "column": 7
             }
           },
           "metadata": {},
           "params": [
             {
-              "name": "id"
+              "name": "index"
             }
-          ]
+          ],
+          "return": {
+            "type": "void"
+          }
         },
         {
           "name": "_getIcon",
@@ -148,11 +262,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 142,
+              "line": 228,
               "column": 6
             },
             "end": {
-              "line": 144,
+              "line": 230,
               "column": 7
             }
           },
@@ -172,11 +286,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 148,
+              "line": 234,
               "column": 6
             },
             "end": {
-              "line": 154,
+              "line": 248,
               "column": 7
             }
           },
@@ -193,6 +307,9 @@
             },
             {
               "name": "completed"
+            },
+            {
+              "name": "restricted"
             }
           ]
         },
@@ -202,11 +319,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 158,
+              "line": 252,
               "column": 6
             },
             "end": {
-              "line": 172,
+              "line": 266,
               "column": 7
             }
           },
@@ -215,31 +332,10 @@
             {
               "name": "event"
             }
-          ]
-        },
-        {
-          "name": "_updateItems",
-          "description": "Handles updates to the items array by un-assigning and re-assigning\nthe value to trigger the dom-repeat to re-render.",
-          "privacy": "protected",
-          "sourceRange": {
-            "start": {
-              "line": 177,
-              "column": 6
-            },
-            "end": {
-              "line": 182,
-              "column": 7
-            }
-          },
-          "metadata": {},
-          "params": [
-            {
-              "name": "newValue"
-            },
-            {
-              "name": "oldValue"
-            }
-          ]
+          ],
+          "return": {
+            "type": "void"
+          }
         }
       ],
       "staticMethods": [],
@@ -247,11 +343,11 @@
       "metadata": {},
       "sourceRange": {
         "start": {
-          "line": 48,
+          "line": 64,
           "column": 12
         },
         "end": {
-          "line": 184,
+          "line": 267,
           "column": 5
         }
       },
@@ -263,55 +359,71 @@
           "description": "An array of steps and their details. If empty, the component is not rendered.\nThe structure should be:\n\n     [{ id: String, label: String }, ... ]",
           "sourceRange": {
             "start": {
-              "line": 58,
+              "line": 74,
               "column": 8
             },
             "end": {
-              "line": 64,
+              "line": 79,
               "column": 9
             }
           },
           "metadata": {},
-          "type": "Array"
+          "type": "Array | null | undefined"
         },
         {
           "name": "completed",
           "description": "An array of IDs corresponding to items in the steps array which\nshould be marked as completed.",
           "sourceRange": {
             "start": {
-              "line": 69,
+              "line": 84,
               "column": 8
             },
             "end": {
-              "line": 74,
+              "line": 89,
               "column": 9
             }
           },
           "metadata": {},
-          "type": "Array"
+          "type": "Array | null | undefined"
+        },
+        {
+          "name": "restricted",
+          "description": "An array of IDs corresponding to items in the steps array which\nshould be restricted from navigation.",
+          "sourceRange": {
+            "start": {
+              "line": 94,
+              "column": 8
+            },
+            "end": {
+              "line": 99,
+              "column": 9
+            }
+          },
+          "metadata": {},
+          "type": "Array | null | undefined"
         },
         {
           "name": "current-step",
           "description": "The array index of the currently active step.",
           "sourceRange": {
             "start": {
-              "line": 78,
+              "line": 103,
               "column": 8
             },
             "end": {
-              "line": 81,
+              "line": 106,
               "column": 9
             }
           },
           "metadata": {},
-          "type": "number"
+          "type": "number | null | undefined"
         }
       ],
       "events": [
         {
           "type": "CustomEvent",
           "name": "px-steps-tapped",
-          "description": "px-steps-tapped",
+          "description": "Event fired when a step in the px-steps is tapped.\nEvent.detail will contain the id of the step, e.g.\n\n     { id : \"3\" }\nYou should intercept this event, perform any necessary\nvalidation or saving on the current step in the process,\ndecide if the user is allowed to navigate to that step,\nand then use the `jumpToStep` method to actually change steps.",
           "metadata": {}
         }
       ],
