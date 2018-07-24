@@ -107,7 +107,7 @@ Custom property | Description
         }
       },
       /**
-       * Sets the current step to complete and advances to the next step.
+       * Sets the current step, or specified step, to complete and advances to the next step.
        */
       complete: function (index) {
         const byCurrentStep = index === null || index === undefined;
@@ -115,11 +115,11 @@ Custom property | Description
           console.warn("Can't complete step: the steps array is empty or undefined.");
           return;
         } else if (!byCurrentStep && (index > this.items.length - 1 || index < 0)) {
-          console.warn("Can't complete to step at index '" + index + "'; that step doesn't exist.");
+          console.warn("Can't complete to step at index '" + index + "': that step doesn't exist.");
           return;
         }
 
-        var id = byCurrentStep ? this.items[this.currentStep].id : this.items[index].id;
+        const id = byCurrentStep ? this.items[this.currentStep].id : this.items[index].id;
         if (this.completed.indexOf(id) === -1) {
           this.push('completed', id);
         }
@@ -130,6 +130,25 @@ Custom property | Description
         }
       },
       /**
+       * Sets the current step, or specified step, to incomplete.
+       */
+      incomplete: function (index) {
+        const byCurrentStep = index === null || index === undefined;
+        if (!this.items || this.items.length <= 0) {
+          console.warn("Can't set step to incomplete: the steps array is empty or undefined.");
+          return;
+        } else if (!byCurrentStep && (index > this.items.length - 1 || index < 0)) {
+          console.warn("Can't set step to incomplete at index '" + index + "': that step doesn't exist.");
+          return;
+        }
+
+        const id = byCurrentStep ? this.items[this.currentStep].id : this.items[index].id;
+        if (this.completed.indexOf(id) !== -1) {
+          const completed = this.completed.filter(_id => _id !== id);
+          this.set('completed', completed);
+        }
+      },
+      /**
        * Restricts the step at the provided index.
        */
       restrict: function (index) {
@@ -137,7 +156,7 @@ Custom property | Description
           console.warn("Can't restrict step: the steps array is empty or undefined.");
           return;
         } else if (index && (index > this.items.length - 1 || index < 0)) {
-          console.warn("Can't restrict to step at index '" + index + "'; that step doesn't exist.");
+          console.warn("Can't restrict to step at index '" + index + "': that step doesn't exist.");
           return;
         }
 
@@ -155,19 +174,15 @@ Custom property | Description
           console.warn("Can't allow step: the steps array is empty or undefined.");
           return;
         } else if (index && (index > this.items.length - 1 || index < 0)) {
-          console.warn("Can't allow to step at index '" + index + "'; that step doesn't exist.");
+          console.warn("Can't allow to step at index '" + index + "': that step doesn't exist.");
           return;
         }
 
         var id = this.items[index].id;
         var restrictedIndex = this.restricted.indexOf(id);
         if (restrictedIndex !== -1) {
-          this.set(
-            'restricted',
-            this.restricted.filter(function(id, index) {
-              return index !== restrictedIndex;
-            })
-          );
+          const restricted = this.restricted.filter((id, index) => index !== restrictedIndex);
+          this.set('restricted', restricted);
         }
       },
       /**
