@@ -47,7 +47,7 @@ Custom property | Description
 
     <div class="container flex flex--top">
       <template id="steps" is="dom-repeat" items="[[items]]">
-        <div class$="step-wrapper [[_getStepState(item,index,currentStep,completed)]]">
+        <div class$="step-wrapper [[_getStepState(item,index,currentStep,completed,restricted)]]">
           <div class="step-connector"></div>
           <div id="[[item.id]]" class="step-item" on-tap="_handleTap">
             <div class="step-icon">
@@ -89,6 +89,16 @@ Custom property | Description
           }
         },
         /**
+        * An array of IDs corresponding to items in the steps array which
+        * should be restricted from navigation.
+        */
+        restricted: {
+          type: Array,
+          value: function () {
+            return [];
+          }
+        },
+        /**
          * The array index of the currently active step.
          */
         currentStep: {
@@ -97,21 +107,82 @@ Custom property | Description
         }
       },
       /**
-       * Sets the current step to complete and advances to the next step.
+       * Sets the current step, or specified step, to complete and advances to the next step.
        */
-      complete: function () {
+      complete: function (index) {
+        const byCurrentStep = index === null || index === undefined;
         if (!this.items || this.items.length <= 0) {
           console.warn("Can't complete step: the steps array is empty or undefined.");
           return;
+        } else if (!byCurrentStep && (index > this.items.length - 1 || index < 0)) {
+          console.warn("Can't complete to step at index '" + index + "': that step doesn't exist.");
+          return;
         }
-        var id = this.items[this.currentStep].id;
+
+        const id = byCurrentStep ? this.items[this.currentStep].id : this.items[index].id;
         if (this.completed.indexOf(id) === -1) {
           this.push('completed', id);
         }
 
         // Select next step, if there is one
-        if (this.currentStep < this.items.length) {
+        if (byCurrentStep && this.currentStep < this.items.length) {
           this.next();
+        }
+      },
+      /**
+       * Sets the current step, or specified step, to incomplete.
+       */
+      incomplete: function (index) {
+        const byCurrentStep = index === null || index === undefined;
+        if (!this.items || this.items.length <= 0) {
+          console.warn("Can't set step to incomplete: the steps array is empty or undefined.");
+          return;
+        } else if (!byCurrentStep && (index > this.items.length - 1 || index < 0)) {
+          console.warn("Can't set step to incomplete at index '" + index + "': that step doesn't exist.");
+          return;
+        }
+
+        const id = byCurrentStep ? this.items[this.currentStep].id : this.items[index].id;
+        if (this.completed.indexOf(id) !== -1) {
+          const completed = this.completed.filter(_id => _id !== id);
+          this.set('completed', completed);
+        }
+      },
+      /**
+       * Restricts the step at the provided index.
+       */
+      restrict: function (index) {
+        if (!this.items || this.items.length <= 0) {
+          console.warn("Can't restrict step: the steps array is empty or undefined.");
+          return;
+        } else if (index && (index > this.items.length - 1 || index < 0)) {
+          console.warn("Can't restrict to step at index '" + index + "': that step doesn't exist.");
+          return;
+        }
+
+        var id = this.items[index].id;
+        if (this.restricted.indexOf(id) === -1) {
+          // this.push is what should be used, but it doesn't work for re-rendering the dom-repeat...
+          this.set('restricted', [...this.restricted, id])
+        }
+      },
+      /**
+       * Removes restriction on step at provided index.
+       */
+      allow: function (index) {
+        if (!this.items || this.items.length <= 0) {
+          console.warn("Can't allow step: the steps array is empty or undefined.");
+          return;
+        } else if (index && (index > this.items.length - 1 || index < 0)) {
+          console.warn("Can't allow to step at index '" + index + "': that step doesn't exist.");
+          return;
+        }
+
+        var id = this.items[index].id;
+        var restrictedIndex = this.restricted.indexOf(id);
+        if (restrictedIndex !== -1) {
+          const restricted = this.restricted.filter((id, index) => index !== restrictedIndex);
+          this.set('restricted', restricted);
         }
       },
       /**
@@ -161,12 +232,20 @@ Custom property | Description
       /**
       * Calculates which class to assign to a given node.
       */
-      _getStepState: function (item, index, currentStep, completed) {
+      _getStepState: function (item, index, currentStep, completed, restricted) {
+        let state = '';
+
         if (index === currentStep) {
-          return 'current';
+          state = 'current';
         } else if (completed.indexOf(item.id) > -1) {
-          return 'complete';
+          state = 'complete';
         }
+
+        if (restricted.indexOf(item.id) > -1) {
+          state += ' restricted';
+        }
+
+        return state;
       },
       /**
       * Fires an event when a node is tapped upon.

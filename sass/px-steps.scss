@@ -69,6 +69,10 @@
     :active {
       color: var(--px-steps-text-color--pressed, blue);
     }
+    &.restricted {
+      pointer-events:  none;
+      cursor: not-allowed;
+    }
   }
   .step-wrapper:first-of-type .step-connector {
     display: none;
